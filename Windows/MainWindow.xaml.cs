@@ -33,6 +33,7 @@ namespace OpenMediaDownloader
             if (viewModel.SearchText == "Paste link here")
             {
                 viewModel.SearchText = string.Empty;
+                viewModel.SearchQueryColor = "#000000";
             }
         }
 
@@ -42,6 +43,7 @@ namespace OpenMediaDownloader
             if (viewModel.SearchText == string.Empty)
             {
                 viewModel.SearchText = "Paste link here";
+                viewModel.SearchQueryColor = "#b3b3b3";
             }
         }
     }

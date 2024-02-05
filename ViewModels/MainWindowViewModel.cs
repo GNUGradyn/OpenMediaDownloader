@@ -9,20 +9,35 @@ namespace OpenMediaDownloader.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private string _text = "Paste link here";
+        private string _searchQuery = "Paste link here";
+        private string _searchQueryColor = "#b3b3b3";
 
         public string SearchText
         {
-            get => _text;
+            get => _searchQuery;
             set
             {
-                if (_text != value)
+                if (_searchQuery != value)
                 {
-                    _text = value;
+                    _searchQuery = value;
                     OnPropertyChanged(nameof(SearchText));
                 }
             }
         }
+
+        public string SearchQueryColor
+        {
+            get => _searchQueryColor;
+            set
+            {
+                if (_searchQueryColor != value)
+                {
+                    _searchQueryColor = value;
+                    OnPropertyChanged(nameof(SearchQueryColor));
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
