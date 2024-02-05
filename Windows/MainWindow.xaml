@@ -6,11 +6,15 @@
         xmlns:local="clr-namespace:OpenMediaDownloader"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="450">
-    <Grid>
+    <Grid Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Margin="0 0 4 0" BorderBrush="#333333" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus"/>
+        <Button Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="4 0 4 0">Download</Button>
     </Grid>
 </Window>

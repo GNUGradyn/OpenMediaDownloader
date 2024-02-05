@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenMediaDownloader.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,25 @@ namespace OpenMediaDownloader
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
+        }
+
+        private void Search_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainViewModel)DataContext;
+            if (viewModel.SearchText == "Paste link here")
+            {
+                viewModel.SearchText = string.Empty;
+            }
+        }
+
+        private void Search_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainViewModel)DataContext;
+            if (viewModel.SearchText == string.Empty)
+            {
+                viewModel.SearchText = "Paste link here";
+            }
         }
     }
 }
