@@ -13,7 +13,7 @@ namespace OpenMediaDownloader
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "External/yt-dlp.exe",
+                    FileName = EmbeddedExeHelper.TempExePath,
                     Arguments = $"-j {url}",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
