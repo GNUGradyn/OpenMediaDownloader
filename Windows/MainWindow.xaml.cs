@@ -31,9 +31,9 @@ namespace OpenMediaDownloader
         }
 
         private void Download_Click(object sender, RoutedEventArgs e) {
-            var viewModel = (MainViewModel)DataContext;
-            if (string.IsNullOrWhiteSpace(viewModel.SearchText)) return;
-            Console.WriteLine($"Attempting to download {viewModel.SearchText}");
+            //var viewModel = (SearchViewModel)DataContext;
+            //if (string.IsNullOrWhiteSpace(viewModel.SearchText)) return;
+            //Console.WriteLine($"Attempting to download {viewModel.SearchText}");
 
         }
     }
