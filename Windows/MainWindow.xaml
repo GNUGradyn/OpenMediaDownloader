@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Open Media Downloader" Height="800" Width="450">
     <Window.Resources>
-        <local:StringToBrushConverter x:Key="StringToBrushConverter"/>
         <Style x:Key="RoundedProgressBar" TargetType="{x:Type ProgressBar}">
             <Setter Property="Template">
                 <Setter.Value>
