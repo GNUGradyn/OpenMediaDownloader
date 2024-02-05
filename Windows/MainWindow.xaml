@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OpenMediaDownloader"
+        xmlns:local="clr-namespace:OpenMediaDownloader" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls"
         mc:Ignorable="d"
         Title="Open Media Downloader" Height="800" Width="450">
     <Window.Resources>
@@ -48,8 +48,8 @@
             <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
-        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" Margin="0 0 4 0" BorderBrush="#333333" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" VerticalContentAlignment="Center" Foreground="{Binding SearchQueryColor, Converter={StaticResource StringToBrushConverter}}"/>
-        <Button Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="4 0 4 0">Download</Button>
+        <controls:Search/>
+        <Button Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="4 0 4 0" Click="Download_Click">Download</Button>
         <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="30" Style="{StaticResource RoundedProgressBar}" />
         <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0 3 0 0">Overall Progress</Label>
         <Label FontSize="12" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Copyright Gradyn Wursten. Powered by yt-dlp</Label>

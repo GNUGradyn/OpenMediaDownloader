@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpenMediaDownloader.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class SearchViewModel : INotifyPropertyChanged
     {
         private string _searchQuery = "Paste link here";
         private string _searchQueryColor = "#b3b3b3";
+        private bool _loading = false;
 
         public string SearchText
         {
@@ -34,6 +35,19 @@ namespace OpenMediaDownloader.ViewModels
                 {
                     _searchQueryColor = value;
                     OnPropertyChanged(nameof(SearchQueryColor));
+                }
+            }
+        }
+
+        public bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading != value)
+                {
+                    _loading = value;
+                    OnPropertyChanged(nameof(Loading));
                 }
             }
         }

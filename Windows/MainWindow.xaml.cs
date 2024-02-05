@@ -21,30 +21,20 @@ namespace OpenMediaDownloader
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IYoutubeDlService _youtubeDlService;
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            
+            _youtubeDlService =  new YoutubeDlService();
         }
 
-        private void Search_GotFocus(object sender, RoutedEventArgs e)
-        {
+        private void Download_Click(object sender, RoutedEventArgs e) {
             var viewModel = (MainViewModel)DataContext;
-            if (viewModel.SearchText == "Paste link here")
-            {
-                viewModel.SearchText = string.Empty;
-                viewModel.SearchQueryColor = "#000000";
-            }
-        }
+            if (string.IsNullOrWhiteSpace(viewModel.SearchText)) return;
+            Console.WriteLine($"Attempting to download {viewModel.SearchText}");
 
-        private void Search_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var viewModel = (MainViewModel)DataContext;
-            if (viewModel.SearchText == string.Empty)
-            {
-                viewModel.SearchText = "Paste link here";
-                viewModel.SearchQueryColor = "#b3b3b3";
-            }
         }
     }
 }
