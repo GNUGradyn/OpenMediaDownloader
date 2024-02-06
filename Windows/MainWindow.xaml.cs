@@ -1,7 +1,9 @@
 ﻿using OpenMediaDownloader.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,11 +44,18 @@ namespace OpenMediaDownloader
                 MessageBox.Show("Unable to fetch metadata for the requested video. Please check the URL", "Open Media Downloader", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
             }
 
+            // Download thumbnail
+            // Download thumbnail
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(RemoveQueryParameters(metadata.Thumbnail), UriKind.Absolute);
+            bitmap.EndInit();
         }
 
-        private void Search_Loaded(object sender, RoutedEventArgs e)
+        private string RemoveQueryParameters(string url)
         {
-
+            var uri = new Uri(url);
+            return url.Substring(0, url.LastIndexOf(uri.Query));
         }
     }
 }
