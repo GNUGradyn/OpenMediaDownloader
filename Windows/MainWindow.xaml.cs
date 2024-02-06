@@ -1,4 +1,5 @@
 ﻿using OpenMediaDownloader.ViewModels;
+using OpenMediaDownloader.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,11 +46,20 @@ namespace OpenMediaDownloader
             }
 
             // Download thumbnail
-            // Download thumbnail
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.UriSource = new Uri(RemoveQueryParameters(metadata.Thumbnail), UriKind.Absolute);
             bitmap.EndInit();
+            context.Loading = false;
+
+            new DownloadWindow()
+            {
+                DataContext = new DownloadWindowViewModel()
+                {
+                    Title = metadata.Title,
+                    Thumbnail = bitmap
+                }
+            }.Show();
         }
 
         private string RemoveQueryParameters(string url)
