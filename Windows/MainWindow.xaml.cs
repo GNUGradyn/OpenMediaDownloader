@@ -57,7 +57,9 @@ namespace OpenMediaDownloader
                 DataContext = new DownloadWindowViewModel()
                 {
                     Title = metadata.Title,
-                    Thumbnail = bitmap
+                    Thumbnail = bitmap,
+                    OriginalHeight = metadata.Hegiht,
+                    OriginalWidth = metadata.Width
                 }
             }.Show();
         }

@@ -11,5 +11,6 @@
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
         <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
         <controls:ContentBox Title="Metadata"></controls:ContentBox>
+        <GroupBox x:Name="Metadata"/>
     </StackPanel>
 </Window>

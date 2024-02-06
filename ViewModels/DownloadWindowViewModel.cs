@@ -15,6 +15,8 @@ namespace OpenMediaDownloader.ViewModels
 
         private string _title;
         private BitmapImage _thumbnail;
+        private int _originalWidth;
+        private int _originalheight;
 
         public string Title
         {
@@ -26,6 +28,32 @@ namespace OpenMediaDownloader.ViewModels
             {
                 _title = value;
                 OnPropertyChanged(nameof(Title));
+            }
+        }
+
+        public int OriginalWidth
+        {
+            get
+            {
+                return _originalWidth;
+            }
+            set
+            {
+                _originalWidth = value;
+                OnPropertyChanged(nameof(OriginalWidth));
+            }
+        }
+
+        public int OriginalHeight
+        {
+            get
+            {
+                return _originalheight;
+            }
+            set
+            {
+                _originalheight = value;
+                OnPropertyChanged(nameof(OriginalHeight));
             }
         }
 
