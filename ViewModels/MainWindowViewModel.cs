@@ -10,7 +10,7 @@ namespace OpenMediaDownloader.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        private string _searchText;
+        private string _searchText = "Paste link here";
 
         public string SearchText
         {

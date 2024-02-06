@@ -47,7 +47,7 @@
             <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
-        <controls:Search Margin="0 0 4 0" SearchText="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Loading="{Binding Loading, UpdateSourceTrigger=PropertyChanged}"/>
+        <controls:Search Margin="0 0 4 0" SearchText="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Loading="{Binding Loading, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="4 0 4 0" Click="Download_Click">Download</Button>
         <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="30" Style="{StaticResource RoundedProgressBar}" />
         <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0 2 0 0">Overall Progress</Label>
