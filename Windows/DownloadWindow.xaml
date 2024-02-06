@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMediaDownloader.Windows" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls"
         mc:Ignorable="d"
-        Title="DownloadWindow" SizeToContent="WidthAndHeight" MaxWidth="450"
+        Title="New Download" SizeToContent="WidthAndHeight" MaxWidth="450"
         d:DesignHeight="800" d:DesignWidth="450" Background="#F0F0F0">
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
@@ -16,7 +16,24 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="1"></Label>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Resolution</Label>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Resolution}"/>
+                <Label Grid.Row="1" Grid.Column="0">Duration</Label>
+                <Label Grid.Row="2" Grid.Column="0">FPS</Label>
+                <Label Grid.Row="3" Grid.Column="0">Container</Label>
+                <Label Grid.Row="4" Grid.Column="0">Video Codec</Label>
+                <Label Grid.Row="5" Grid.Column="0">Audio Codec</Label>
+                <Label Grid.Row="6" Grid.Column="0">Uploader</Label>
+
             </Grid>
         </GroupBox>
     </StackPanel>

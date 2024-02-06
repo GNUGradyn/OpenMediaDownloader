@@ -15,8 +15,8 @@ namespace OpenMediaDownloader.ViewModels
 
         private string _title;
         private BitmapImage _thumbnail;
-        private int _originalWidth;
-        private int _originalheight;
+        private string _resolution;
+        private string _container;
 
         public string Title
         {
@@ -31,29 +31,29 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
-        public int OriginalWidth
+        public string Resolution
         {
             get
             {
-                return _originalWidth;
+                return _resolution;
             }
             set
             {
-                _originalWidth = value;
-                OnPropertyChanged(nameof(OriginalWidth));
+                _resolution = value;
+                OnPropertyChanged(nameof(Resolution));
             }
         }
 
-        public int OriginalHeight
+        public string Container
         {
             get
             {
-                return _originalheight;
+                return _container;
             }
             set
             {
-                _originalheight = value;
-                OnPropertyChanged(nameof(OriginalHeight));
+                _container = value;
+                OnPropertyChanged(nameof(Container));
             }
         }
 
@@ -69,6 +69,7 @@ namespace OpenMediaDownloader.ViewModels
                 OnPropertyChanged(nameof(Thumbnail));
             }
         }
+
 
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

@@ -58,8 +58,7 @@ namespace OpenMediaDownloader
                 {
                     Title = metadata.Title,
                     Thumbnail = bitmap,
-                    OriginalHeight = metadata.Hegiht,
-                    OriginalWidth = metadata.Width
+                    Resolution = $"{metadata.Width}x{metadata.Height}",
                 }
             }.Show();
         }

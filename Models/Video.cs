@@ -13,5 +13,13 @@ public class Video
     [JsonProperty("width")]
     public int Width { get; set; }
     [JsonProperty("height")]
-    public int Hegiht { get; set; } 
+    public int Height { get; set; }
+    [JsonProperty("duration")]
+    public int Duration { get; set; }
+    [JsonProperty("duration_string")]
+    public string DurationString { get; set; }
+    [JsonProperty("vcodec")]
+    public string VideoCodec { get; set; }
+    [JsonProperty("acodec")]
+    public string AudioCodec { get; set; }
 }
