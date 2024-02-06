@@ -22,6 +22,17 @@ namespace OpenMediaDownloader.Windows
         public DownloadWindow()
         {
             InitializeComponent();
+            ContentRendered += DownloadWindow_ContentRendered;
+        }
+
+        // https://stackoverflow.com/questions/72120715/wpf-window-need-to-use-sizetocontent-up-to-a-specific-size  
+        private void DownloadWindow_ContentRendered(object sender, EventArgs e)
+        {
+            // Clear the MaxWidth/MaxHeight so that you can manually resize larger
+            MaxWidth = double.PositiveInfinity;
+            MaxHeight = double.PositiveInfinity;
+            // Clear the SizeToContent so that it doesn't automatically resize to large datasets
+            SizeToContent = SizeToContent.Manual;
         }
     }
 }

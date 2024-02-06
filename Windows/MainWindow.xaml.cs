@@ -65,7 +65,7 @@ namespace OpenMediaDownloader
         private string RemoveQueryParameters(string url)
         {
             var uri = new Uri(url);
-            return url.Substring(0, url.LastIndexOf(uri.Query));
+            return uri.GetLeftPart(UriPartial.Path);
         }
     }
 }

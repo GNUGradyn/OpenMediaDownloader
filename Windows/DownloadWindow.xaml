@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMediaDownloader.Windows"
         mc:Ignorable="d"
-        Title="DownloadWindow" SizeToContent="WidthAndHeight">
+        Title="DownloadWindow" SizeToContent="WidthAndHeight" MaxWidth="450">
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
+        <Image x:Name="thumbnail" Source="{Binding Thumbnail}"/>
     </StackPanel>
 </Window>
