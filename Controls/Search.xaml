@@ -11,6 +11,6 @@
     </Control.Resources>
     <Grid>
         <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  BorderBrush="#333333" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" VerticalContentAlignment="Center" Foreground="{Binding SearchQueryColor, Converter={StaticResource StringToBrushConverter}}"/>
-
+        
     </Grid>
 </UserControl>

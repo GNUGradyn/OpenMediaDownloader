@@ -26,14 +26,19 @@ namespace OpenMediaDownloader
         public MainWindow()
         {
             InitializeComponent();
-            
-            _youtubeDlService =  new YoutubeDlService();
+
+            _youtubeDlService = new YoutubeDlService();
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e) {
+        private void Download_Click(object sender, RoutedEventArgs e)
+        {
             //var viewModel = (SearchViewModel)DataContext;
             //if (string.IsNullOrWhiteSpace(viewModel.SearchText)) return;
             //Console.WriteLine($"Attempting to download {viewModel.SearchText}");
+        }
+
+        private void Search_Loaded(object sender, RoutedEventArgs e)
+        {
 
         }
     }
