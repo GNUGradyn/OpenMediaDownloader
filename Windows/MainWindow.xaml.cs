@@ -34,6 +34,7 @@ namespace OpenMediaDownloader
         {
             var context = DataContext as MainWindowViewModel;
             if (string.IsNullOrWhiteSpace(context.SearchText)) return;
+            context.Loading = true;
         }
 
         private void Search_Loaded(object sender, RoutedEventArgs e)

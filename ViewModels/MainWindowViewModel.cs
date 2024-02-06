@@ -11,6 +11,8 @@ namespace OpenMediaDownloader.ViewModels
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private string _searchText = "Paste link here";
+        private bool _loading = false;
+
 
         public string SearchText
         {
@@ -21,6 +23,19 @@ namespace OpenMediaDownloader.ViewModels
             set
             {
                 _searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool Loading
+        {
+            get
+            {
+                return _loading;
+            }
+            set
+            {
+                _loading = value;
                 OnPropertyChanged();
             }
         }

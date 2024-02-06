@@ -63,5 +63,10 @@ namespace OpenMediaDownloader.Controls
             var colorBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(color);
             searchTextBox.Foreground = colorBrush;
         }
+
+        private void UpdateLoadingStatusInUI(bool loading)
+        {
+            loader.Visibility = loading ? Visibility.Visible : Visibility.Hidden;
+        }
     }
 }
