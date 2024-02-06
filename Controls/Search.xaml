@@ -10,7 +10,6 @@
         <local1:StringToBrushConverter x:Key="StringToBrushConverter"/>
     </Control.Resources>
     <Grid>
-        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  BorderBrush="#333333" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" VerticalContentAlignment="Center" Foreground="{Binding SearchQueryColor, Converter={StaticResource StringToBrushConverter}}"/>
-        
+        <TextBox Name="searchTextBox" Text="{Binding SearchText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Search}}, UpdateSourceTrigger=PropertyChanged}" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" VerticalContentAlignment="Center" Foreground="#b3b3b3"/>
     </Grid>
 </UserControl>

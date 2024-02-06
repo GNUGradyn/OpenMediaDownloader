@@ -1,51 +1,67 @@
-﻿using OpenMediaDownloader.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OpenMediaDownloader.Controls
 {
-    /// <summary>
-    /// Interaction logic for Search.xaml
-    /// </summary>
     public partial class Search : UserControl
     {
-       
         public Search()
         {
             InitializeComponent();
-            DataContext = new SearchViewModel();
+        }
+
+        private string _searchQueryColor = "#b3b3b3";
+
+        public static readonly DependencyProperty SearchTextProperty =
+            DependencyProperty.Register("SearchText", typeof(string), typeof(Search), new PropertyMetadata("Paste link here"));
+
+        public string SearchText
+        {
+            get { return (string)GetValue(SearchTextProperty); }
+            set { SetValue(SearchTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty LoadingProperty =
+            DependencyProperty.Register("Loading", typeof(bool), typeof(Search), new PropertyMetadata(default(bool)));
+
+        public bool Loading
+        {
+            get { return (bool)GetValue(LoadingProperty); }
+            set { SetValue(LoadingProperty, value); }
+        }
+
+        public string SearchQueryColor
+        {
+            get { return _searchQueryColor; }
+            set { 
+                _searchQueryColor = value;
+                UpdateSearchQueryColorInUI(_searchQueryColor);
+            }
         }
 
         private void Search_GotFocus(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SearchViewModel)DataContext;
-            if (viewModel.SearchText == "Paste link here")
+            if (SearchText == "Paste link here")
             {
-                viewModel.SearchText = string.Empty;
-                viewModel.SearchQueryColor = "#000000";
+                SearchText = string.Empty;
+                SearchQueryColor = "#000000";
             }
         }
 
         private void Search_LostFocus(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SearchViewModel)DataContext;
-            if (viewModel.SearchText == string.Empty)
+            if (string.IsNullOrEmpty(SearchText))
             {
-                viewModel.SearchText = "Paste link here";
-                viewModel.SearchQueryColor = "#b3b3b3";
+                SearchText = "Paste link here";
+                SearchQueryColor = "#b3b3b3";
             }
+        }
+
+        private void UpdateSearchQueryColorInUI(string color)
+        {
+            var colorBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(color);
+            searchTextBox.Foreground = colorBrush;
         }
     }
 }
