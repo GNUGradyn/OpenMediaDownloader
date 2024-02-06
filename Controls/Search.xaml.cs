@@ -23,15 +23,22 @@ namespace OpenMediaDownloader.Controls
         }
 
         public static readonly DependencyProperty LoadingProperty =
-            DependencyProperty.Register("Loading", typeof(bool), typeof(Search), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("Loading", typeof(bool), typeof(Search), new PropertyMetadata(false, OnLoadingChanged));
+
+        private static void OnLoadingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var search = d as Search;
+            if (search != null)
+            {
+                bool loading = (bool)e.NewValue;
+                search.UpdateLoadingStatusInUI(loading);
+            }
+        }
 
         public bool Loading
         {
             get { return (bool)GetValue(LoadingProperty); }
-            set { 
-                SetValue(LoadingProperty, value);
-                UpdateLoadingStatusInUI(value);
-            }
+            set { SetValue(LoadingProperty, value); }
         }
 
         public string SearchQueryColor
