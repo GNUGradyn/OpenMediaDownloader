@@ -10,6 +10,14 @@
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
         <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
-        <GroupBox x:Name="Metadata"/>
+        <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1"></Label>
+            </Grid>
+        </GroupBox>
     </StackPanel>
 </Window>
