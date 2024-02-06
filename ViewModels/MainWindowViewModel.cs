@@ -23,7 +23,7 @@ namespace OpenMediaDownloader.ViewModels
             set
             {
                 _searchText = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SearchText));
             }
         }
 
@@ -36,7 +36,7 @@ namespace OpenMediaDownloader.ViewModels
             set
             {
                 _loading = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Loading));
             }
         }
 

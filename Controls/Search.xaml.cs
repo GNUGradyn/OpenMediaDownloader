@@ -28,7 +28,10 @@ namespace OpenMediaDownloader.Controls
         public bool Loading
         {
             get { return (bool)GetValue(LoadingProperty); }
-            set { SetValue(LoadingProperty, value); }
+            set { 
+                SetValue(LoadingProperty, value);
+                UpdateLoadingStatusInUI(value);
+            }
         }
 
         public string SearchQueryColor
