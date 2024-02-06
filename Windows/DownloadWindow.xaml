@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OpenMediaDownloader.Windows"
+        xmlns:local="clr-namespace:OpenMediaDownloader.Windows" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls"
         mc:Ignorable="d"
-        Title="DownloadWindow" SizeToContent="WidthAndHeight" MaxWidth="450">
+        Title="DownloadWindow" SizeToContent="WidthAndHeight" MaxWidth="450"
+        d:DesignHeight="800" d:DesignWidth="450" Background="#F0F0F0">
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
         <Image x:Name="thumbnail" Source="{Binding Thumbnail}"/>
+        <controls:ContentBox Title="Metadata"></controls:ContentBox>
     </StackPanel>
 </Window>
