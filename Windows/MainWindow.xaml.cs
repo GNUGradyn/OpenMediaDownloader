@@ -36,6 +36,12 @@ namespace OpenMediaDownloader
             if (string.IsNullOrWhiteSpace(context.SearchText)) return;
             context.Loading = true;
             Video metadata = await _youtubeDlService.GetVideoMetadata(context.SearchText);
+            if (metadata == null)
+            {
+                context.Loading = false;
+                MessageBox.Show("Unable to fetch metadata for the requested video. Please check the URL", "Open Media Downloader", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
+            }
+
         }
 
         private void Search_Loaded(object sender, RoutedEventArgs e)
