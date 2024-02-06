@@ -16,7 +16,7 @@ namespace OpenMediaDownloader
         {
             // Logic to extract the EXE and set `TempExePath`
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "OpenMediaDownloader.yt-dlp.exe";
+            var resourceName = "OpenMediaDownloader.External.yt-dlp.exe";
             var tempFile = Path.GetTempFileName();
             File.Delete(tempFile); // Delete the temp file created by GetTempFileName
             TempExePath = Path.ChangeExtension(tempFile, ".exe");

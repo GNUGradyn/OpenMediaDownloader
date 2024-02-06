@@ -30,11 +30,12 @@ namespace OpenMediaDownloader
             _youtubeDlService = new YoutubeDlService();
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e)
+        private async void Download_Click(object sender, RoutedEventArgs e)
         {
             var context = DataContext as MainWindowViewModel;
             if (string.IsNullOrWhiteSpace(context.SearchText)) return;
             context.Loading = true;
+            Video metadata = await _youtubeDlService.GetVideoMetadata(context.SearchText);
         }
 
         private void Search_Loaded(object sender, RoutedEventArgs e)

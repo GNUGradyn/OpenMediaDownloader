@@ -9,11 +9,12 @@ namespace OpenMediaDownloader
     {
         public async Task<Video> GetVideoMetadata(string url)
         {
+            var exe = EmbeddedExeHelper.TempExePath;
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = EmbeddedExeHelper.TempExePath,
+                    FileName = exe,
                     Arguments = $"-j {url}",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
