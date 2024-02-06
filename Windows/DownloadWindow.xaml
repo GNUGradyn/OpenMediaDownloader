@@ -10,7 +10,7 @@
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
         <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
-        <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2">
+        <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
