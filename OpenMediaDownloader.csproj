@@ -245,6 +245,7 @@
     <Compile Include="Services\IYoutubeDlService.cs" />
     <Compile Include="Services\YoutubeDlService.cs" />
     <Compile Include="StringToBrushConverter.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -290,9 +291,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="External\yt-dlp.exe" />
   </ItemGroup>

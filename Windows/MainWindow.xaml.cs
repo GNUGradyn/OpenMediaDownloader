@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenMediaDownloader.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,14 @@ namespace OpenMediaDownloader
         public MainWindow()
         {
             InitializeComponent();
-
+            DataContext = new MainWindowViewModel();
             _youtubeDlService = new YoutubeDlService();
         }
 
         private void Download_Click(object sender, RoutedEventArgs e)
         {
-            //var viewModel = (SearchViewModel)DataContext;
-            //if (string.IsNullOrWhiteSpace(viewModel.SearchText)) return;
-            //Console.WriteLine($"Attempting to download {viewModel.SearchText}");
+            var context = DataContext as MainWindowViewModel;
+            if (string.IsNullOrWhiteSpace(context.SearchText)) return;
         }
 
         private void Search_Loaded(object sender, RoutedEventArgs e)
