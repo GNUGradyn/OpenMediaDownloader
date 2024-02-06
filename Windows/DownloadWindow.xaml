@@ -9,7 +9,7 @@
         d:DesignHeight="800" d:DesignWidth="450" Background="#F0F0F0">
     <StackPanel Width="Auto">
         <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
-        <Image x:Name="thumbnail" Source="{Binding Thumbnail}"/>
+        <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
         <controls:ContentBox Title="Metadata"></controls:ContentBox>
     </StackPanel>
 </Window>
