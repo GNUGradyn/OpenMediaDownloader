@@ -18,7 +18,7 @@ namespace OpenMediaDownloader.ViewModels
         private string _resolution;
         private string _container;
         private string _duration;
-        private float _fps;
+        private float? _fps;
         private string _videoCodec;
         private string _audioCodec;
         private string _uploader;
@@ -75,7 +75,7 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
-        public float FPS
+        public float? FPS
         {
             get
             {

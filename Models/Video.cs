@@ -23,7 +23,7 @@ public class Video
     [JsonProperty("acodec")]
     public string AudioCodec { get; set; }
     [JsonProperty("fps")]
-    public float FPS { get; set; }
+    public float? FPS { get; set; }
     [JsonProperty("ext")]
     public string Container { get; set; }
 }

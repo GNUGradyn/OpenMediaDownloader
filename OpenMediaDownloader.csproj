@@ -247,11 +247,12 @@
     <Compile Include="Controls\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\FloatToStringConverter.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Services\IYoutubeDlService.cs" />
     <Compile Include="Services\YoutubeDlService.cs" />
-    <Compile Include="StringToBrushConverter.cs" />
+    <Compile Include="Converters\StringToBrushConverter.cs" />
     <Compile Include="ViewModels\DownloadWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Windows\DownloadWindow.xaml.cs">
