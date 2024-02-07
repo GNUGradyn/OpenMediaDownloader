@@ -17,7 +17,7 @@ namespace OpenMediaDownloader.ViewModels
         private BitmapImage _thumbnail;
         private string _resolution;
         private string _container;
-        private string _duration;
+        private float _duration;
         private float _fps;
         private string _videoCodec;
         private string _audioCodec;
