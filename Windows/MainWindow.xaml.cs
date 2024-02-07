@@ -65,7 +65,7 @@ namespace OpenMediaDownloader
                     VideoCodec = metadata.VideoCodec,
                     AudioCodec = metadata.AudioCodec,
                     Uploader = metadata.Uploader,
-                    FormatOptions = metadata.Formats
+                    FormatOptions = metadata.Formats.Where(x => x.Container != "mhtml").ToArray()
                 }
             }.Show();
         }
