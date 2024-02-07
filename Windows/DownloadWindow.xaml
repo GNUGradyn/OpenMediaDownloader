@@ -11,51 +11,51 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Width="Auto">
-            <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
-            <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
-            <ScrollViewer VerticalScrollBarVisibility="Visible">
-                <StackPanel>
-                    <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0">Resolution</Label>
-                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Resolution}"/>
-                            <Label Grid.Row="1" Grid.Column="0">Duration</Label>
-                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Duration}"/>
-                            <Label Grid.Row="2" Grid.Column="0">FPS</Label>
-                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding FPS, Converter={StaticResource FloatToStringConverter}}"/>
-                            <Label Grid.Row="3" Grid.Column="0">Container</Label>
-                            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Container}"/>
-                            <Label Grid.Row="4" Grid.Column="0">Video Codec</Label>
-                            <Label Grid.Row="4" Grid.Column="1" Content="{Binding VideoCodec}"/>
-                            <Label Grid.Row="5" Grid.Column="0">Audio Codec</Label>
-                            <Label Grid.Row="5" Grid.Column="1" Content="{Binding AudioCodec}"/>
-                            <Label Grid.Row="6" Grid.Column="0">Uploader</Label>
-                            <Label Grid.Row="6" Grid.Column="1" Content="{Binding Uploader}"/>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Output Format" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
-                        <DataGrid ColumnWidth="*" Name="formatSelector" SelectionMode="Single" ItemsSource="{Binding FormatOptions}" IsReadOnly="True"/>
-                    </GroupBox>
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-        <Button Grid.Row="1" Padding="4" Margin="4">Download</Button>
+        <Label Grid.Row="0" FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
+        <Image Grid.Row="1" x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
+            <StackPanel>
+                <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0">Resolution</Label>
+                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Resolution}"/>
+                        <Label Grid.Row="1" Grid.Column="0">Duration</Label>
+                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Duration}"/>
+                        <Label Grid.Row="2" Grid.Column="0">FPS</Label>
+                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding FPS, Converter={StaticResource FloatToStringConverter}}"/>
+                        <Label Grid.Row="3" Grid.Column="0">Container</Label>
+                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Container}"/>
+                        <Label Grid.Row="4" Grid.Column="0">Video Codec</Label>
+                        <Label Grid.Row="4" Grid.Column="1" Content="{Binding VideoCodec}"/>
+                        <Label Grid.Row="5" Grid.Column="0">Audio Codec</Label>
+                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding AudioCodec}"/>
+                        <Label Grid.Row="6" Grid.Column="0">Uploader</Label>
+                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding Uploader}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Output Format" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
+                    <DataGrid ColumnWidth="*" Name="formatSelector" SelectionMode="Single" ItemsSource="{Binding FormatOptions}" IsReadOnly="True"/>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Grid.Row="3" Padding="4" Margin="4">Download</Button>
     </Grid>
 </Window>
