@@ -248,6 +248,7 @@
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\FloatToStringConverter.cs" />
+    <Compile Include="Converters\FormatOptionToTableObject.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />
     <Compile Include="Models\FormatOption.cs" />
     <Compile Include="Models\Video.cs" />
