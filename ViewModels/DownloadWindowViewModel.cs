@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using OpenMediaDownloader.Models;
 
 namespace OpenMediaDownloader.ViewModels
 {
@@ -22,7 +23,21 @@ namespace OpenMediaDownloader.ViewModels
         private string _videoCodec;
         private string _audioCodec;
         private string _uploader;
+        private FormatOption[] _formatOptions;
 
+        public FormatOption[] FormatOptions
+        {
+            get
+            {
+                return _formatOptions;
+            }
+            set
+            {
+                _formatOptions = value;
+                OnPropertyChanged(nameof(FormatOptions));
+            }
+        }
+        
         public string Title
         {
             get

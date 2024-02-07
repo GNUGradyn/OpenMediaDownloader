@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OpenMediaDownloader.Models;
 
 public class Video
 {
@@ -26,4 +27,6 @@ public class Video
     public float? FPS { get; set; }
     [JsonProperty("ext")]
     public string Container { get; set; }
+    [JsonProperty("formats")]
+    public FormatOption[] Formats { get; set; }
 }

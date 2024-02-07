@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMediaDownloader.Windows" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls" xmlns:openmediadownloader="clr-namespace:OpenMediaDownloader"
         mc:Ignorable="d"
-        Title="New Download" SizeToContent="WidthAndHeight" MaxWidth="450"
-        d:DesignHeight="800" d:DesignWidth="450" Background="#F0F0F0">
+        Title="New Download" Width="450" Height="800" Background="#F0F0F0">
     <Window.Resources>
         <openmediadownloader:FloatToStringConverter x:Key="FloatToStringConverter"/>
     </Window.Resources>
@@ -18,7 +17,7 @@
         <StackPanel Grid.Row="0" Width="Auto">
             <Label FontSize="25" HorizontalAlignment="Center" Content="{Binding Title}" ToolTip="{Binding Title}"/>
             <Image x:Name="thumbnail" Source="{Binding Thumbnail}" Panel.ZIndex="999"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
                 <StackPanel>
                     <GroupBox Header="Metadata" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
                         <Grid>
@@ -51,8 +50,8 @@
                             <Label Grid.Row="6" Grid.Column="1" Content="{Binding Uploader}"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Output" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
-
+                    <GroupBox Header="Output Format" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
+                        <DataGrid Name="formatSelector" SelectionMode="Single" ItemsSource="{Binding FormatOptions}" IsReadOnly="True"/>
                     </GroupBox>
                 </StackPanel>
             </ScrollViewer>

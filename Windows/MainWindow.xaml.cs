@@ -64,7 +64,8 @@ namespace OpenMediaDownloader
                     Container = metadata.Container,
                     VideoCodec = metadata.VideoCodec,
                     AudioCodec = metadata.AudioCodec,
-                    Uploader = metadata.Uploader
+                    Uploader = metadata.Uploader,
+                    FormatOptions = metadata.Formats
                 }
             }.Show();
         }
