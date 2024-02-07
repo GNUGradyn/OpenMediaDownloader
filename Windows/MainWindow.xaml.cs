@@ -59,6 +59,12 @@ namespace OpenMediaDownloader
                     Title = metadata.Title,
                     Thumbnail = bitmap,
                     Resolution = $"{metadata.Width}x{metadata.Height}",
+                    Duration = metadata.DurationString,
+                    FPS = metadata.FPS,
+                    Container = metadata.Container,
+                    VideoCodec = metadata.VideoCodec,
+                    AudioCodec = metadata.AudioCodec,
+                    Uploader = metadata.Uploader
                 }
             }.Show();
         }

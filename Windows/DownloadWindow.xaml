@@ -28,11 +28,18 @@
                 <Label Grid.Row="0" Grid.Column="0">Resolution</Label>
                 <Label Grid.Row="0" Grid.Column="1" Content="{Binding Resolution}"/>
                 <Label Grid.Row="1" Grid.Column="0">Duration</Label>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Duration}"/>
                 <Label Grid.Row="2" Grid.Column="0">FPS</Label>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding FPS}"/>
                 <Label Grid.Row="3" Grid.Column="0">Container</Label>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Container}"/>
                 <Label Grid.Row="4" Grid.Column="0">Video Codec</Label>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding VideoCodec}"/>
                 <Label Grid.Row="5" Grid.Column="0">Audio Codec</Label>
+                <Label Grid.Row="5" Grid.Column="1" Content="{Binding AudioCodec}"/>
                 <Label Grid.Row="6" Grid.Column="0">Uploader</Label>
+                <Label Grid.Row="6" Grid.Column="1" Content="{Binding Uploader}"/>
+
 
             </Grid>
         </GroupBox>

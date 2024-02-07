@@ -17,6 +17,11 @@ namespace OpenMediaDownloader.ViewModels
         private BitmapImage _thumbnail;
         private string _resolution;
         private string _container;
+        private string _duration;
+        private int _fps;
+        private string _videoCodec;
+        private string _audioCodec;
+        private string _uploader;
 
         public string Title
         {
@@ -54,6 +59,71 @@ namespace OpenMediaDownloader.ViewModels
             {
                 _container = value;
                 OnPropertyChanged(nameof(Container));
+            }
+        }
+
+        public string Duration
+        {
+            get
+            {
+                return _duration;
+            }
+            set
+            {
+                _duration = value;
+                OnPropertyChanged(nameof(Duration));
+            }
+        }
+
+        public int FPS
+        {
+            get
+            {
+                return _fps;
+            }
+            set
+            {
+                _fps = value;
+                OnPropertyChanged(nameof(FPS));
+            }
+        }
+
+        public string VideoCodec
+        {
+            get
+            {
+                return _videoCodec;
+            }
+            set
+            {
+                _videoCodec = value;
+                OnPropertyChanged(nameof(VideoCodec));
+            }
+        }
+
+        public string AudioCodec
+        {
+            get
+            {
+                return _audioCodec;
+            }
+            set
+            {
+                _audioCodec = value;
+                OnPropertyChanged(nameof(AudioCodec));
+            }
+        }
+
+        public string Uploader
+        {
+            get
+            {
+                return _uploader;
+            }
+            set
+            {
+                _uploader = value;
+                OnPropertyChanged(nameof(Uploader));
             }
         }
 
