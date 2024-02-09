@@ -19,8 +19,8 @@ namespace OpenMediaDownloader
                 Height = x.Height.ToString() ?? "N/A",
                 Width = x.Width.ToString() ?? "N/A",
                 Container = string.IsNullOrEmpty(x.Container) ? "Unknown" : x.Container,
-                AudioCodec = string.IsNullOrEmpty(x.AudioCodec) ? "Video only" : x.AudioCodec,
-                VideoCodec = string.IsNullOrEmpty(x.VideoCodec) ? "Audio only" : x.VideoCodec,
+                AudioCodec = GetAudioCodecName(x.AudioCodec),
+                VideoCodec = GetVideoCodecName(x.VideoCodec),
                 FPS = x.FPS.ToString() ?? "Unknown"
             });
         }
@@ -33,6 +33,15 @@ namespace OpenMediaDownloader
         private string GetAudioCodecName(string name)
         {
             if (string.IsNullOrEmpty(name)) return "Unknown";
+            if (name == "none") return "Video Only";
+            return name;
+        }
+
+        private string GetVideoCodecName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return "Unknown";
+            if (name == "none") return "Audio Only";
+            return name;
         }
     }
 }
