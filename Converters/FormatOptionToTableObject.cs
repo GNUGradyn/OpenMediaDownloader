@@ -7,23 +7,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace OpenMediaDownloader.Converters
+namespace OpenMediaDownloader
 {
     public class FormatOptionArrayToTableObjectArray : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var formatOptionArray = (value as FormatOption[]);
-            //return formatOptionArray.Select<FormatOption>(new object
-            //{
-
-            //}).ToArray();
-            throw new NotImplementedException();
+            return formatOptionArray.ToList().Select(x => new
+            {
+                Height = x.Height.ToString() ?? "N/A",
+                Width = x.Width.ToString() ?? "N/A",
+                Container = string.IsNullOrEmpty(x.Container) ? "Unknown" : x.Container,
+                AudioCodec = string.IsNullOrEmpty(x.AudioCodec) ? "Video only" : x.AudioCodec,
+                VideoCodec = string.IsNullOrEmpty(x.VideoCodec) ? "Audio only" : x.VideoCodec,
+                FPS = x.FPS.ToString() ?? "Unknown"
+            });
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private string GetAudioCodecName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return "Unknown";
         }
     }
 }

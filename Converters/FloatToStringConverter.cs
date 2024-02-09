@@ -13,7 +13,7 @@ namespace OpenMediaDownloader
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             float? valueFloat = (float?)value;
-            if (valueFloat == null) return "unknown";
+            if (valueFloat == null) return "Unknown";
             return valueFloat.ToString();
         }
 
