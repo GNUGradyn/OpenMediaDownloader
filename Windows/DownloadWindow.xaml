@@ -14,7 +14,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MaxHeight="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -55,7 +55,37 @@
                 </GroupBox>
                 <GroupBox Header="Output Format" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
                     <ScrollViewer Height="250">
-                        <DataGrid ColumnWidth="*" Name="formatSelector" SelectionMode="Single" ItemsSource="{Binding FormatOptions, Converter={StaticResource FormatOptionArrayToTableObjectArray}}" IsReadOnly="True"/>
+                        <DataGrid ColumnWidth="*" Name="formatSelector" ItemsSource="{Binding FormatOptions, Converter={StaticResource FormatOptionArrayToTableObjectArray}}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Header="Use Video" Binding="{Binding UseVideo}" IsReadOnly="False"/>
+                                <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio}" IsReadOnly="False"/>
+                                <DataGridTextColumn Header="Height" Binding="{Binding Height}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Width" Binding="{Binding Width}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Container" Binding="{Binding Container}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Video Codec" Binding="{Binding VideoCodec}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Video Only">
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>                                
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </ScrollViewer>
                 </GroupBox>
             </StackPanel>

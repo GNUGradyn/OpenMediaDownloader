@@ -7,41 +7,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace OpenMediaDownloader
-{
-    public class FormatOptionArrayToTableObjectArray : IValueConverter
+    namespace OpenMediaDownloader
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public class FormatOptionArrayToTableObjectArray : IValueConverter
         {
-            var formatOptionArray = (value as FormatOption[]);
-            return formatOptionArray.ToList().Select(x => new
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                Height = x.Height.ToString() ?? "N/A",
-                Width = x.Width.ToString() ?? "N/A",
-                Container = string.IsNullOrEmpty(x.Container) ? "Unknown" : x.Container,
-                AudioCodec = GetAudioCodecName(x.AudioCodec),
-                VideoCodec = GetVideoCodecName(x.VideoCodec),
-                FPS = x.FPS.ToString() ?? "Unknown"
-            });
-        }
+                var formatOptionArray = (value as FormatOption[]);
+                return formatOptionArray.ToList().Select(x => new OutputFormatModel
+                {
+                    UseVideo = false,
+                    UseAudio = false,
+                    Height = x.Height.ToString() ?? "N/A",
+                    Width = x.Width.ToString() ?? "N/A",
+                    Container = string.IsNullOrEmpty(x.Container) ? "Unknown" : x.Container,
+                    AudioCodec = GetAudioCodecName(x.AudioCodec),
+                    VideoCodec = GetVideoCodecName(x.VideoCodec),
+                    FPS = x.FPS.ToString() ?? "Unknown",
+                });
+            }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
 
-        private string GetAudioCodecName(string name)
-        {
-            if (string.IsNullOrEmpty(name)) return "Unknown";
-            if (name == "none") return "Video Only";
-            return name;
-        }
+            private string GetAudioCodecName(string name)
+            {
+                if (string.IsNullOrEmpty(name)) return "Unknown";
+                if (name == "none") return "Video Only";
+                return name;
+            }
 
-        private string GetVideoCodecName(string name)
-        {
-            if (string.IsNullOrEmpty(name)) return "Unknown";
-            if (name == "none") return "Audio Only";
-            return name;
+            private string GetVideoCodecName(string name)
+            {
+                if (string.IsNullOrEmpty(name)) return "Unknown";
+                if (name == "none") return "Audio Only";
+                return name;
+            }
         }
     }
-}

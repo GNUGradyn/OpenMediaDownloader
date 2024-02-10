@@ -251,6 +251,7 @@
     <Compile Include="Converters\FormatOptionToTableObject.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />
     <Compile Include="Models\FormatOption.cs" />
+    <Compile Include="Models\OutputFormatModel.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Services\IYoutubeDlService.cs" />
     <Compile Include="Services\YoutubeDlService.cs" />
