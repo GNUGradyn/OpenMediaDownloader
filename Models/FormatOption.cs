@@ -16,5 +16,8 @@ namespace OpenMediaDownloader.Models
         public string VideoCodec { get; set; }
         [JsonProperty("fps")]
         public float? FPS { get; set; }
+
+        public bool UseVideo { get; set; }
+        public bool UseAudio { get; set; }
     }
 }

@@ -16,8 +16,8 @@ using System.Windows.Data;
                 var formatOptionArray = (value as FormatOption[]);
                 return formatOptionArray.ToList().Select(x => new OutputFormatModel
                 {
-                    UseVideo = false,
-                    UseAudio = false,
+                    UseVideo = x.UseVideo,
+                    UseAudio = x.UseAudio,
                     Height = x.Height.ToString() ?? "N/A",
                     Width = x.Width.ToString() ?? "N/A",
                     Container = string.IsNullOrEmpty(x.Container) ? "Unknown" : x.Container,
