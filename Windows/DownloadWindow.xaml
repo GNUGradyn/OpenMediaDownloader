@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMediaDownloader.Windows" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls" xmlns:openmediadownloader="clr-namespace:OpenMediaDownloader"
         mc:Ignorable="d"
-        Title="New Download" Width="450" Height="800" Background="#F0F0F0">
+        Title="New Download" Width="519" Height="800" Background="#F0F0F0">
     <Window.Resources>
         <openmediadownloader:FloatToStringConverter x:Key="FloatToStringConverter"/>
         <openmediadownloader:FormatOptionArrayToTableObjectArray x:Key="FormatOptionArrayToTableObjectArray"/>
@@ -55,7 +55,19 @@
                 </GroupBox>
                 <GroupBox Header="Output Format" BorderBrush="#dcdcdc" BorderThickness="2" Margin="5 0 5 0">
                     <ScrollViewer Height="250">
-                        <DataGrid ColumnWidth="*" Name="formatSelector" ItemsSource="{Binding FormatOptions, Converter={StaticResource FormatOptionArrayToTableObjectArray}}" AutoGenerateColumns="False">
+                        <DataGrid Name="formatSelector" ItemsSource="{Binding FormatOptions, Converter={StaticResource FormatOptionArrayToTableObjectArray}}" AutoGenerateColumns="False">
+                            <!--https://stackoverflow.com/questions/3046988/wpf-datagrid-disable-selected-row-styles-or-row-selecting/38795509#38795509-->
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="Use Video" Binding="{Binding UseVideo}" IsReadOnly="False"/>
                                 <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio}" IsReadOnly="False"/>
@@ -69,17 +81,27 @@
                                                 <DataTrigger Binding="{Binding VideoCodec}" Value="Video Only">
                                                     <Setter Property="Foreground" Value="Gray"/>
                                                 </DataTrigger>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}">
+                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}" Width="*">
                                     <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
                                                     <Setter Property="Foreground" Value="Gray"/>
                                                 </DataTrigger>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.CellStyle>

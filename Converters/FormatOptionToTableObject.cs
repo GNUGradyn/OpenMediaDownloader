@@ -24,7 +24,7 @@ using System.Windows.Data;
                     AudioCodec = GetAudioCodecName(x.AudioCodec),
                     VideoCodec = GetVideoCodecName(x.VideoCodec),
                     FPS = x.FPS.ToString() ?? "Unknown",
-                });
+                }).ToList();
             }
 
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
