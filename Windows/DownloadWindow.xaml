@@ -74,34 +74,34 @@
                                 <DataGridTextColumn Header="Height" Binding="{Binding Height}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Width" Binding="{Binding Width}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Container" Binding="{Binding Container}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Video Codec" Binding="{Binding VideoCodec}">
+                                <DataGridTextColumn Header="Video Codec" Binding="{Binding VideoCodec}" IsReadOnly="True">
                                     <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Video Only">
-                                                    <Setter Property="Foreground" Value="Gray"/>
-                                                </DataTrigger>
                                                 <Trigger Property="DataGridCell.IsSelected" Value="True">
                                                     <Setter Property="BorderBrush" Value="Transparent"/>
                                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                                     <Setter Property="Background" Value="Transparent"/>
                                                 </Trigger>
+                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Video Only">
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}" Width="*">
+                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}" Width="*" IsReadOnly="True">
                                     <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Audio Only">
-                                                    <Setter Property="Foreground" Value="Gray"/>
-                                                </DataTrigger>
                                                 <Trigger Property="DataGridCell.IsSelected" Value="True">
                                                     <Setter Property="BorderBrush" Value="Transparent"/>
                                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                                     <Setter Property="Background" Value="Transparent"/>
                                                 </Trigger>
+                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Audio Only">
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.CellStyle>
