@@ -31,11 +31,11 @@ namespace OpenMediaDownloader.Windows
             CheckBox checkbox = sender as CheckBox;
             if (checkbox.Name == "UseVideo")
             {
-                viewModel.FormatOptions.ToList().ForEach(x => x.UseVideo = false);
+                viewModel.OutputFormatViewModels.ToList().ForEach(x => x.UseVideo = false);
             }
             if (checkbox.Name == "UseAudio")
             {
-                viewModel.FormatOptions.ToList().ForEach(x => x.UseAudio = false);
+                viewModel.OutputFormatViewModels.ToList().ForEach(x => x.UseAudio = false);
 
             }
         }

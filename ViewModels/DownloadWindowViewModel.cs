@@ -24,18 +24,18 @@ namespace OpenMediaDownloader.ViewModels
         private string _videoCodec;
         private string _audioCodec;
         private string _uploader;
-        private ObservableCollection<FormatOption> _formatOptions;
+        private ObservableCollection<OutputFormatViewModel> _outputFormatViewModels;
 
-        public ObservableCollection<FormatOption> FormatOptions
+        public ObservableCollection<OutputFormatViewModel> OutputFormatViewModels
         {
             get
             {
-                return _formatOptions;
+                return _outputFormatViewModels;
             }
             set
             {
-                _formatOptions = value;
-                OnPropertyChanged(nameof(FormatOptions));
+                _outputFormatViewModels = value;
+                OnPropertyChanged(nameof(OutputFormatViewModels));
             }
         }
         
