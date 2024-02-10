@@ -94,7 +94,7 @@
                                     <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
+                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Audio Only">
                                                     <Setter Property="Foreground" Value="Gray"/>
                                                 </DataTrigger>
                                                 <Trigger Property="DataGridCell.IsSelected" Value="True">
