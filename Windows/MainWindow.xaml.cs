@@ -109,18 +109,18 @@ namespace OpenMediaDownloader
 
         private void setDefaultVideoAndAudioStream(ref DownloadWindowViewModel viewModel)
         {
-            bool shouldSelectVideo = viewModel.OutputFormatViewModels.Any(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none");
+            bool shouldSelectVideo = viewModel.OutputFormatViewModels.Any(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "Audio Only");
             if (shouldSelectVideo) // We need to select a default video stream
             {
-                viewModel.OutputFormatViewModels.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none").First().UseVideo = true;
+                viewModel.OutputFormatViewModels.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "Video Only").First().UseVideo = true;
             }
 
-            if (viewModel.OutputFormatViewModels.Any(x => !string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none"))
+            if (viewModel.OutputFormatViewModels.Any(x => !string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "Video Only"))
             { // We need to select a default audio stream
 
                 if (shouldSelectVideo) // We are also selecting video. Give preference to the stream we are already downloading so we dont have to mix the audio and video together
                 {
-                    var defaultVideoStream = viewModel.OutputFormatViewModels.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none").First();
+                    var defaultVideoStream = viewModel.OutputFormatViewModels.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "Audio Only").First();
                     if (!string.IsNullOrEmpty(defaultVideoStream.AudioCodec) && defaultVideoStream.AudioCodec != "Video Only") // Video already has audio. Simply use the same file
                     {
                         defaultVideoStream.UseAudio = true;
@@ -128,9 +128,9 @@ namespace OpenMediaDownloader
                     }
                 }
                 // If we've gotten this far, we're either working with an audio only download or the default video did not have audio
-                if (viewModel.OutputFormatViewModels.Any(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "Audio Only") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none"))) // Give preference to audio only files for audio
+                if (viewModel.OutputFormatViewModels.Any(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "Audio Only") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "Video Only"))) // Give preference to audio only files for audio
                 {
-                    viewModel.OutputFormatViewModels.First(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "Audio Only") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none")).UseAudio = true;
+                    viewModel.OutputFormatViewModels.First(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "Audio Only") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "Video Only")).UseAudio = true;
                     return;
                 }
                 // If we've gotten this far there were no audio only files to choose from but we still need to select a default audio stream. Just go with whatever we can at this point.
