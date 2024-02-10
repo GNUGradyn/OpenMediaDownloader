@@ -83,7 +83,7 @@
                                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                                     <Setter Property="Background" Value="Transparent"/>
                                                 </Trigger>
-                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Video Only">
+                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Audio Only">
                                                     <Setter Property="Foreground" Value="Gray"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -99,7 +99,7 @@
                                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                                     <Setter Property="Background" Value="Transparent"/>
                                                 </Trigger>
-                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Audio Only">
+                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
                                                     <Setter Property="Foreground" Value="Gray"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
