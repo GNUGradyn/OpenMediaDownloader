@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMediaDownloader.Windows" xmlns:controls="clr-namespace:OpenMediaDownloader.Controls" xmlns:openmediadownloader="clr-namespace:OpenMediaDownloader"
         mc:Ignorable="d"
-        Title="New Download" Width="519" Height="800" Background="#F0F0F0">
+        Title="New Download" Width="563" Height="800" Background="#F0F0F0">
     <Window.Resources>
         <openmediadownloader:FloatToStringConverter x:Key="FloatToStringConverter"/>
         <openmediadownloader:FormatOptionArrayToTableObjectArray x:Key="FormatOptionArrayToTableObjectArray"/>
@@ -69,8 +69,20 @@
                                 </Style>
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="Use Video" Binding="{Binding UseVideo}" IsReadOnly="False"/>
-                                <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio}" IsReadOnly="False"/>
+                                <DataGridCheckBoxColumn Header="Use Video" Binding="{Binding UseVideo}" IsReadOnly="False">
+                                    <!--https://stackoverflow.com/a/49893661/4617857-->
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio}" IsReadOnly="False">
+                                    <!--https://stackoverflow.com/a/49893661/4617857-->
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
                                 <DataGridTextColumn Header="Height" Binding="{Binding Height}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Width" Binding="{Binding Width}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Container" Binding="{Binding Container}" IsReadOnly="True"/>
@@ -90,7 +102,7 @@
                                         </Style>
                                     </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}" Width="*" IsReadOnly="True">
+                                <DataGridTextColumn Header="Audio Codec" Binding="{Binding AudioCodec}" IsReadOnly="True">
                                     <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
@@ -105,7 +117,8 @@
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.CellStyle>
-                                </DataGridTextColumn>                                
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="FPS" Binding="{Binding FPS}" IsReadOnly="True" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
