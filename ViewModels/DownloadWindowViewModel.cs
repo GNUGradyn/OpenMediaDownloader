@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,9 +24,9 @@ namespace OpenMediaDownloader.ViewModels
         private string _videoCodec;
         private string _audioCodec;
         private string _uploader;
-        private FormatOption[] _formatOptions;
+        private ObservableCollection<FormatOption> _formatOptions;
 
-        public FormatOption[] FormatOptions
+        public ObservableCollection<FormatOption> FormatOptions
         {
             get
             {

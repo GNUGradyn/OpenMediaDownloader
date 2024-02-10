@@ -24,5 +24,20 @@ namespace OpenMediaDownloader.Windows
         {
             InitializeComponent();
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
+            CheckBox checkbox = sender as CheckBox;
+            if (checkbox.Name == "UseVideo")
+            {
+                viewModel.FormatOptions.ToList().ForEach(x => x.UseVideo = false);
+            }
+            if (checkbox.Name == "UseAudio")
+            {
+                viewModel.FormatOptions.ToList().ForEach(x => x.UseAudio = false);
+
+            }
+        }
     }
 }

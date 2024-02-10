@@ -2,6 +2,7 @@
 using OpenMediaDownloader.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -63,7 +64,7 @@ namespace OpenMediaDownloader
                 VideoCodec = metadata.VideoCodec,
                 AudioCodec = metadata.AudioCodec,
                 Uploader = metadata.Uploader,
-                FormatOptions = metadata.Formats.Where(x => x.Container != "mhtml").Reverse().ToArray()
+                FormatOptions = new ObservableCollection<Models.FormatOption>(metadata.Formats.Where(x => x.Container != "mhtml").Reverse())
             };
 
             setDefaultVideoAndAudioStream(ref viewModel);

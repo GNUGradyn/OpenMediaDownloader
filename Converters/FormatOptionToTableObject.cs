@@ -1,6 +1,7 @@
 ﻿using OpenMediaDownloader.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,8 @@ using System.Windows.Data;
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                var formatOptionArray = (value as FormatOption[]);
-                return formatOptionArray.ToList().Select(x => new OutputFormatModel
+                var formatOptionObservableCollection = (value as ObservableCollection<FormatOption>);
+                return new ObservableCollection<OutputFormatModel>(formatOptionObservableCollection.ToList().Select(x => new OutputFormatModel
                 {
                     UseVideo = x.UseVideo,
                     UseAudio = x.UseAudio,
@@ -24,7 +25,7 @@ using System.Windows.Data;
                     AudioCodec = GetAudioCodecName(x.AudioCodec),
                     VideoCodec = GetVideoCodecName(x.VideoCodec),
                     FPS = x.FPS.ToString() ?? "Unknown",
-                }).ToList();
+                }));
             }
 
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
