@@ -1,4 +1,5 @@
-﻿using OpenMediaDownloader.ViewModels;
+﻿using OpenMediaDownloader.Models;
+using OpenMediaDownloader.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,47 @@ namespace OpenMediaDownloader.Windows
         {
             DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
             CheckBox checkbox = sender as CheckBox;
-            if (checkbox.Name == "UseVideo")
-            {
-                viewModel.OutputFormatViewModels.ToList().ForEach(x => x.UseVideo = false);
-            }
-            if (checkbox.Name == "UseAudio")
-            {
-                viewModel.OutputFormatViewModels.ToList().ForEach(x => x.UseAudio = false);
 
+            // Find the DataGridRow that contains the checkbox
+            DataGridRow row = FindParent<DataGridRow>(checkbox);
+            if (row == null) return;
+
+            // Get the OutputFormatViewModel for the row
+            OutputFormatViewModel currentViewModel = row.DataContext as OutputFormatViewModel;
+            if (currentViewModel == null) return;
+
+            string columnHeader = ((DataGridCell)checkbox.Parent).Column.Header.ToString();
+            if (columnHeader == "Use Video")
+            {
+                viewModel.OutputFormatViewModels.ToList().ForEach(x =>
+                {
+                    if (x != currentViewModel) x.UseVideo = false;
+                });
+            }
+            else if (columnHeader == "Use Audio")
+            {
+                viewModel.OutputFormatViewModels.ToList().ForEach(x =>
+                {
+                    if (x != currentViewModel) x.UseAudio = false;
+                });
+            }
+        }
+
+        // Helper method to find a parent of a given control/item
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null) return null;
+
+            T parent = parentObject as T;
+            if (parent != null)
+            {
+                return parent;
+            }
+            else
+            {
+                return FindParent<T>(parentObject);
             }
         }
     }
