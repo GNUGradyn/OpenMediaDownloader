@@ -52,22 +52,57 @@ namespace OpenMediaDownloader
             bitmap.EndInit();
             context.Loading = false;
 
+            var viewModel = new DownloadWindowViewModel()
+            {
+                Title = metadata.Title,
+                Thumbnail = bitmap,
+                Resolution = $"{metadata.Width}x{metadata.Height}",
+                Duration = metadata.DurationString,
+                FPS = metadata.FPS,
+                Container = metadata.Container,
+                VideoCodec = metadata.VideoCodec,
+                AudioCodec = metadata.AudioCodec,
+                Uploader = metadata.Uploader,
+                FormatOptions = metadata.Formats.Where(x => x.Container != "mhtml").Reverse().ToArray()
+            };
+
+            setDefaultVideoAndAudioStream(ref viewModel);
+
             new DownloadWindow()
             {
-                DataContext = new DownloadWindowViewModel()
-                {
-                    Title = metadata.Title,
-                    Thumbnail = bitmap,
-                    Resolution = $"{metadata.Width}x{metadata.Height}",
-                    Duration = metadata.DurationString,
-                    FPS = metadata.FPS,
-                    Container = metadata.Container,
-                    VideoCodec = metadata.VideoCodec,
-                    AudioCodec = metadata.AudioCodec,
-                    Uploader = metadata.Uploader,
-                    FormatOptions = metadata.Formats.Where(x => x.Container != "mhtml").Reverse().ToArray()
-                }
+                DataContext = viewModel
             }.Show();
+        }
+
+        private void setDefaultVideoAndAudioStream(ref DownloadWindowViewModel viewModel)
+        {
+            bool shouldSelectVideo = viewModel.FormatOptions.Any(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none");
+            if (shouldSelectVideo) // We need to select a default video stream
+            {
+                viewModel.FormatOptions.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none").First().UseVideo = true;
+            }
+
+            if (viewModel.FormatOptions.Any(x => !string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none"))
+            { // We need to select a default audio stream
+
+                if (shouldSelectVideo) // We are also selecting video. Give preference to the stream we are already downloading so we dont have to mix the audio and video together
+                {
+                    var defaultVideoStream = viewModel.FormatOptions.Where(x => !string.IsNullOrEmpty(x.VideoCodec) && x.VideoCodec != "none").First();
+                    if (!string.IsNullOrEmpty(defaultVideoStream.AudioCodec) && defaultVideoStream.AudioCodec != "none") // Video already has audio. Simply use the same file
+                    {
+                        defaultVideoStream.UseAudio = true;
+                        return;
+                    }
+                }
+                // If we've gotten this far, we're either working with an audio only download or the default video did not have audio
+                if (viewModel.FormatOptions.Any(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "none") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none"))) // Give preference to audio only files for audio
+                {
+                    viewModel.FormatOptions.First(x => (string.IsNullOrEmpty(x.VideoCodec) || x.VideoCodec == "none") && (!string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec != "none")).UseAudio = true;
+                    return;
+                }
+                // If we've gotten this far there were no audio only files to choose from but we still need to select a default audio stream. Just go with whatever we can at this point.
+                viewModel.FormatOptions.Where(x => !string.IsNullOrEmpty(x.AudioCodec) && x.AudioCodec == "none").First().UseAudio = true;
+            }
         }
 
         private string RemoveQueryParameters(string url)
