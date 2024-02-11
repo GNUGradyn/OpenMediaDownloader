@@ -10,22 +10,49 @@ namespace OpenMediaDownloader
 {
     public static class EmbeddedExeHelper
     {
-        public static readonly string TempExePath;
+        public static readonly Dictionary<string, string> TempExePaths;
+        public static readonly string TempFolder;
 
         static EmbeddedExeHelper()
         {
-            // Logic to extract the EXE and set `TempExePath`
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "OpenMediaDownloader.External.yt-dlp.exe";
-            var tempFile = Path.GetTempFileName();
-            File.Delete(tempFile); // Delete the temp file created by GetTempFileName
-            TempExePath = Path.ChangeExtension(tempFile, ".exe");
-            Console.WriteLine("Temporary path for yt-dlp: " + TempExePath);
+            TempExePaths = new Dictionary<string, string>();
+            // Use a fixed folder name within the temp directory
+            TempFolder = Path.Combine(Path.GetTempPath(), "OpenMediaDownloaderExes");
+            // Ensure the directory exists or create it
+            Directory.CreateDirectory(TempFolder);
 
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var fileStream = File.Create(TempExePath))
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceNames = assembly.GetManifestResourceNames().Where(name => name.Contains("OpenMediaDownloader.External") && name.EndsWith(".exe"));
+
+            foreach (var resourceName in resourceNames)
             {
-                stream?.CopyTo(fileStream);
+                var exeName = Path.GetFileNameWithoutExtension(resourceName).Split('.').Last() + ".exe"; // Extract the executable name
+                var tempExePath = Path.Combine(TempFolder, exeName);
+                Console.WriteLine($"Temporary path for {exeName}: {tempExePath}");
+
+                // Check if the file already exists to avoid unnecessary extraction
+                if (!File.Exists(tempExePath))
+                {
+                    using (var stream = assembly.GetManifestResourceStream(resourceName))
+                    using (var fileStream = File.Create(tempExePath))
+                    {
+                        stream?.CopyTo(fileStream);
+                    }
+                }
+
+                TempExePaths[exeName] = tempExePath;
+            }
+        }
+
+        public static string GetTempExePath(string exeName)
+        {
+            if (TempExePaths.TryGetValue(exeName, out var path))
+            {
+                return path;
+            }
+            else
+            {
+                throw new FileNotFoundException($"Executable {exeName} not found among embedded resources.");
             }
         }
     }
