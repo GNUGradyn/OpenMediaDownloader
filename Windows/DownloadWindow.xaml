@@ -8,8 +8,6 @@
         Title="New Download" Width="563" Height="800" Background="#F0F0F0">
     <Window.Resources>
         <openmediadownloader:FloatToStringConverter x:Key="FloatToStringConverter"/>
-        <openmediadownloader:VideoCodecToBooleanConverter x:Key="VideoCodecToBooleanConverter"/>
-        <openmediadownloader:AudioCodecToBooleanConverter x:Key="AudioCodecToBooleanConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -69,47 +67,40 @@
                                 </Style>
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Use Video" x:Name="UseVideoColumn">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox Checked="CheckBox_Checked"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  IsEnabled="{Binding VideoCodec, Converter={StaticResource VideoCodecToBooleanConverter}}">
-                                                <CheckBox.Style>
-                                                    <Style TargetType="CheckBox">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding VideoCodec}" Value="Audio Only">
-                                                                <Setter Property="IsEnabled" Value="false"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </CheckBox.Style>
-                                            </CheckBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                                <DataGridTemplateColumn Header="Use Audio" x:Name="UseAudioColumn">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox Checked="CheckBox_Checked"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  IsEnabled="{Binding AudioCodec, Converter={StaticResource AudioCodecToBooleanConverter}}">
-                                                <CheckBox.Style>
-                                                    <Style TargetType="CheckBox">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
-                                                                <Setter Property="IsEnabled" Value="false"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </CheckBox.Style>
-                                            </CheckBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridCheckBoxColumn Header="Use Video" Binding="{Binding UseVideo, Mode=TwoWay}" IsReadOnly="False" x:Name="UseVideo">
+                                    <!--https://stackoverflow.com/a/49893661/4617857-->
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Style.Setters>
+                                                <EventSetter Event="Checked" Handler="CheckBox_Checked"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Audio Only">
+                                                    <Setter Property="IsEnabled" Value="false"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio, Mode=TwoWay}" IsReadOnly="False" x:Name="UseAudio">
+                                    <!--https://stackoverflow.com/a/49893661/4617857-->
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Style.Setters>
+                                                <EventSetter Event="Checked" Handler="CheckBox_Checked"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
+                                                    <Setter Property="IsEnabled" Value="false"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
                                 <DataGridTextColumn Header="Height" Binding="{Binding Height}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Width" Binding="{Binding Width}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Container" Binding="{Binding Container}" IsReadOnly="True"/>
