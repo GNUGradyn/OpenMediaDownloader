@@ -311,6 +311,10 @@
   <ItemGroup>
     <Resource Include="Assets\spinner.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="External\ffmpeg.exe" />
+    <EmbeddedResource Include="External\ffprobe.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.5.5\build\Fody.targets" Condition="Exists('packages\Fody.6.5.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
