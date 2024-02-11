@@ -83,6 +83,20 @@
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridCheckBoxColumn.ElementStyle>
+                                    <DataGridCheckBoxColumn.EditingElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Style.Setters>
+                                                <EventSetter Event="Checked" Handler="CheckBox_Checked"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding VideoCodec}" Value="Audio Only">
+                                                    <Setter Property="IsEnabled" Value="false"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.EditingElementStyle>
                                 </DataGridCheckBoxColumn>
                                 <DataGridCheckBoxColumn Header="Use Audio" Binding="{Binding UseAudio, Mode=TwoWay}" IsReadOnly="False" x:Name="UseAudio">
                                     <!--https://stackoverflow.com/a/49893661/4617857-->
