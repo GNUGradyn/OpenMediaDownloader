@@ -248,6 +248,8 @@
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\FloatToStringConverter.cs" />
+    <Compile Include="Converters\AudioCodecToBooleanConverter.cs" />
+    <Compile Include="Converters\VideoCodecToBooleanConverter.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />
     <Compile Include="Models\FormatOption.cs" />
     <Compile Include="ViewModels\OutputFormatViewModel.cs" />

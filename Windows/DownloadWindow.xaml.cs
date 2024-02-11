@@ -39,7 +39,7 @@ namespace OpenMediaDownloader.Windows
             OutputFormatViewModel currentViewModel = row.DataContext as OutputFormatViewModel;
             if (currentViewModel == null) return;
 
-            string columnHeader = ((DataGridCell)checkbox.Parent).Column.Header.ToString();
+            string columnHeader = ((DataGridCell)((FrameworkElement)checkbox.TemplatedParent).Parent).Column.Header.ToString();
             if (columnHeader == "Use Video")
             {
                 viewModel.OutputFormatViewModels.ToList().ForEach(x =>
