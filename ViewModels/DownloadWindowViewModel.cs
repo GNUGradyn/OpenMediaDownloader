@@ -75,6 +75,7 @@ namespace OpenMediaDownloader.ViewModels
             set
             {
                 _path = value;
+                OnPropertyChanged(nameof(Path));
             }
         }
 

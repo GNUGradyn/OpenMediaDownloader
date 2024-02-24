@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -32,20 +33,36 @@ namespace OpenMediaDownloader.Controls
             DependencyProperty.Register("Placeholder", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Text", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty, SetTextColor));
 
-
+        private static void SetTextColor(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TextboxWithPlaceholder obj = d as TextboxWithPlaceholder;
+            if (obj.Text == obj.Placeholder)
+            {
+                obj.SearchQueryColor = "#b3b3b3";
+            }
+            else
+            {
+                obj.SearchQueryColor = "#000000";
+            }
+        }
 
         public string Placeholder
         {
             get { return (string)GetValue(PlaceholderProperty); }
-            set { SetValue(PlaceholderProperty, value); }
+            set { 
+                SetValue(PlaceholderProperty, value);
+            }
         }
 
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            set { 
+                SetValue(TextProperty, value);
+
+            }
         }
 
         public string SearchQueryColor
@@ -68,7 +85,6 @@ namespace OpenMediaDownloader.Controls
             if (Text == Placeholder)
             {
                 Text = string.Empty;
-                SearchQueryColor = "#000000";
             }
         }
 
@@ -77,7 +93,6 @@ namespace OpenMediaDownloader.Controls
             if (string.IsNullOrEmpty(Text))
             {
                 Text = Placeholder;
-                SearchQueryColor = "#b3b3b3";
             }
         }
 

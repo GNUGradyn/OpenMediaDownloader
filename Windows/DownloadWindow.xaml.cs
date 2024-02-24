@@ -3,6 +3,7 @@ using OpenMediaDownloader.Models;
 using OpenMediaDownloader.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace OpenMediaDownloader.Windows
     /// </summary>
     public partial class DownloadWindow : Window
     {
+
         public DownloadWindow()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace OpenMediaDownloader.Windows
             var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
             if (dialog.ShowDialog() == true)
             {
-                string selectedFolder = dialog.SelectedPath;
+                ((DownloadWindowViewModel)DataContext).Path = dialog.SelectedPath;
             }
         }
 
