@@ -9,13 +9,13 @@ namespace OpenMediaDownloader
     {
         public async Task<Video> GetVideoMetadata(string url)
         {
-            var exe = EmbeddedExeHelper.TempExePath;
+            var exe = EmbeddedExeHelper.GetTempExePath("yt-dlp.exe");
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-j {url}",
+                    Arguments = $"-j {url}  --ffmpeg-location {EmbeddedExeHelper.TempFolder}",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
