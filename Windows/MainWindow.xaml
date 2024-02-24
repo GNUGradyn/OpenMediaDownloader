@@ -51,6 +51,5 @@
         <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="30" Style="{StaticResource RoundedProgressBar}" />
         <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0 2 0 0">Overall Progress</Label>
         <Label FontSize="12" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Copyright Gradyn Wursten. Powered by yt-dlp</Label>
-
     </Grid>
 </Window>

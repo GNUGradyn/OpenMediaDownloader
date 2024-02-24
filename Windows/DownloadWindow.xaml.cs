@@ -1,4 +1,5 @@
-﻿using OpenMediaDownloader.Models;
+﻿using Microsoft.Win32;
+using OpenMediaDownloader.Models;
 using OpenMediaDownloader.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,15 @@ namespace OpenMediaDownloader.Windows
         public DownloadWindow()
         {
             InitializeComponent();
+        }
+
+        private void BrowseForDirectory(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                string selectedFolder = dialog.SelectedPath;
+            }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

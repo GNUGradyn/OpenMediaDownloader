@@ -45,7 +45,15 @@ namespace OpenMediaDownloader
             if (metadata == null)
             {
                 context.Loading = false;
-                MessageBox.Show("Unable to fetch metadata for the requested video. Please check the URL", "Open Media Downloader", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
+                var dialog = new Ookii.Dialogs.Wpf.TaskDialog()
+                {
+                    WindowTitle = "Open Media Downloader",
+                    Content = "Unable to fetch metadata for the requested video. Please check the URL",
+                    MainIcon = Ookii.Dialogs.Wpf.TaskDialogIcon.Error
+                };
+                dialog.Buttons.Add(new Ookii.Dialogs.Wpf.TaskDialogButton(Ookii.Dialogs.Wpf.ButtonType.Ok));
+                dialog.Show();
+                return;
             }
 
             // Download thumbnail

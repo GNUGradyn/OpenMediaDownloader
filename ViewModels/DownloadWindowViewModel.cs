@@ -182,6 +182,13 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
+        public string FileExtension
+        {
+            get
+            {
+                return "." + Container;
+            }
+        }
 
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
