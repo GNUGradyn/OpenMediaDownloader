@@ -232,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TextboxWithPlaceholder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\DownloadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +250,9 @@
     </Compile>
     <Compile Include="Controls\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextboxWithPlaceholder.xaml.cs">
+      <DependentUpon>TextboxWithPlaceholder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\FloatToStringConverter.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />

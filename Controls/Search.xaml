@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.ColumnSpan="2" Name="searchTextBox" Text="{Binding SearchText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Search}}, UpdateSourceTrigger=PropertyChanged}" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" VerticalContentAlignment="Center" Foreground="#b3b3b3"/>
+        <local:TextboxWithPlaceholder Placeholder="Paste link here" Grid.ColumnSpan="2" Text="{Binding SearchText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Search}}, UpdateSourceTrigger=PropertyChanged}"/>
         <Image Name="loader" Grid.Column="1" gif:ImageBehavior.AnimatedSource="pack://application:,,,/Assets/spinner.gif" Visibility="Hidden"/>
     </Grid>
 </UserControl>

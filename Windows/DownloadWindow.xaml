@@ -169,6 +169,18 @@
                         </DataGrid>
                     </ScrollViewer>
                 </GroupBox>
+                <GroupBox Header="Output Path">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </GroupBox>
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="3" Padding="4" Margin="4">Download</Button>
