@@ -169,16 +169,22 @@
                         </DataGrid>
                     </ScrollViewer>
                 </GroupBox>
-                <GroupBox Header="Output Path">
+                <GroupBox Header="Output Path" Padding="5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0">File Name</Label>
+                        <Label Grid.Row="1" Grid.Column="0">Output Directory</Label>
+                        <controls:TextboxWithPlaceholder Padding="3" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="File Name" Text="{Binding Filename}"/>
+                        <controls:TextboxWithPlaceholder Padding="3" Grid.Row="1" Grid.Column="1" Placeholder="Path" Text="{Binding Path}"/>
+                        <Button Grid.Row="2" Grid.Column="2" Margin="3">Browse</Button>
                     </Grid>
                 </GroupBox>
             </StackPanel>

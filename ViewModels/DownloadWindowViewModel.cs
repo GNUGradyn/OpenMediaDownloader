@@ -25,6 +25,8 @@ namespace OpenMediaDownloader.ViewModels
         private string _audioCodec;
         private string _uploader;
         private ObservableCollection<OutputFormatViewModel> _outputFormatViewModels;
+        private string _filename;
+        private string _path;
 
         public ObservableCollection<OutputFormatViewModel> OutputFormatViewModels
         {
@@ -49,6 +51,30 @@ namespace OpenMediaDownloader.ViewModels
             {
                 _title = value;
                 OnPropertyChanged(nameof(Title));
+            }
+        }
+
+        public string Filename
+        {
+            get
+            {
+                return _filename;
+            }
+            set
+            {
+                _filename = value;
+            }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                _path = value;
             }
         }
 
