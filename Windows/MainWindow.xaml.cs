@@ -79,6 +79,8 @@ namespace OpenMediaDownloader
 
             setDefaultVideoAndAudioStream(ref viewModel);
 
+            viewModel.AttachPropertyChangeListeners(); // So we can handle file extension changes when the output selection is changed and such
+
             new DownloadWindow()
             {
                 DataContext = viewModel
@@ -100,6 +102,7 @@ namespace OpenMediaDownloader
                 FPS = x.FPS.ToString() ?? "Unknown",
             }));
         }
+
 
         private string GetAudioCodecName(string name)
         {

@@ -56,14 +56,14 @@ namespace OpenMediaDownloader.Windows
             {
                 viewModel.OutputFormatViewModels.ToList().ForEach(x =>
                 {
-                    if (x != currentViewModel) x.UseVideo = false;
+                    x.UseVideo = x == currentViewModel;
                 });
             }
             else if (columnHeader == "Use Audio")
             {
                 viewModel.OutputFormatViewModels.ToList().ForEach(x =>
                 {
-                    if (x != currentViewModel) x.UseAudio = false;
+                    x.UseAudio = x == currentViewModel;
                 });
             }
         }

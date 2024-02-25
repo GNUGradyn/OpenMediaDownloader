@@ -21,26 +21,27 @@ namespace OpenMediaDownloader.Models
 
         public bool UseVideo
         {
-            get
-            {
-                return _useVideo;
-            }
+            get { return _useVideo; }
             set
             {
-                _useVideo = value;
-                OnPropertyChanged(nameof(UseVideo));
+                if (_useVideo != value) // This check is neccesary to prevent an infinite loop where the event handler for updating UseVideo triggers itself
+                {
+                    _useVideo = value;
+                    OnPropertyChanged(nameof(UseVideo));
+                }
             }
         }
+
         public bool UseAudio
         {
-            get
-            {
-                return _useAudio;
-            }
+            get { return _useAudio; } // This check is neccesary to prevent an infinite loop where the event handler for updating UseAudio triggers itself
             set
             {
-                _useAudio = value;
-                OnPropertyChanged(nameof(UseAudio));
+                if (_useAudio != value)
+                {
+                    _useAudio = value;
+                    OnPropertyChanged(nameof(UseAudio));
+                }
             }
         }
 

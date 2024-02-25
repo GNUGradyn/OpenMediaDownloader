@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,7 +25,7 @@ namespace OpenMediaDownloader.ViewModels
         private string _videoCodec;
         private string _audioCodec;
         private string _uploader;
-        private ObservableCollection<OutputFormatViewModel> _outputFormatViewModels;
+        private ObservableCollection<OutputFormatViewModel> _outputFormatViewModels = new ObservableCollection<OutputFormatViewModel>();
         private string _filename;
         private string _path;
 
@@ -40,7 +41,7 @@ namespace OpenMediaDownloader.ViewModels
                 OnPropertyChanged(nameof(OutputFormatViewModels));
             }
         }
-        
+
         public string Title
         {
             get
@@ -190,7 +191,7 @@ namespace OpenMediaDownloader.ViewModels
                 if (OutputFormatViewModels.Any(x => x.UseVideo))
                 {
                     return "." + OutputFormatViewModels.First(x => x.UseVideo).Container;
-                } 
+                }
                 if (OutputFormatViewModels.Any(x => x.UseAudio))
                 {
                     return "." + OutputFormatViewModels.First(x => x.UseAudio).Container;
@@ -204,5 +205,50 @@ namespace OpenMediaDownloader.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        private void OnOutputFormatViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OutputFormatViewModel.UseVideo) || e.PropertyName == nameof(OutputFormatViewModel.UseAudio))
+            {
+                OnPropertyChanged(nameof(FileExtension));
+            }
+        }
+
+        public void AttachPropertyChangeListeners()
+        {
+            foreach (var item in OutputFormatViewModels)
+            {
+                item.PropertyChanged += OnOutputFormatViewModelPropertyChanged;
+            }
+        }
+
+        // When an item is added or removed to the collection, attach or deattach to its property changed event 
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (OutputFormatViewModel item in e.OldItems)
+                {
+                    item.PropertyChanged -= OnItemPropertyChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (OutputFormatViewModel item in e.NewItems)
+                {
+                    item.PropertyChanged += OnItemPropertyChanged;
+                }
+            }
+        }
+
+        private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OutputFormatViewModel.UseVideo) || e.PropertyName == nameof(OutputFormatViewModel.UseAudio))
+            {
+                OnPropertyChanged(nameof(FileExtension));
+            }
+        }
+
     }
 }
