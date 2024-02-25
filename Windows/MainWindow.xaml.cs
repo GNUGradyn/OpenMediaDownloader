@@ -92,7 +92,7 @@ namespace OpenMediaDownloader
             var formatOptionObservableCollection = (value as ObservableCollection<FormatOption>);
             return new ObservableCollection<OutputFormatViewModel>(formatOptionObservableCollection.ToList().Select(x => new OutputFormatViewModel
             {
-                FormatId = x.
+                FormatId = x.FormatId,
                 UseVideo = x.UseVideo,
                 UseAudio = x.UseAudio,
                 Height = x.Height.ToString() ?? "N/A",
