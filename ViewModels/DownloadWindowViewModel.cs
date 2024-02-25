@@ -64,6 +64,8 @@ namespace OpenMediaDownloader.ViewModels
             set
             {
                 _filename = value;
+                OnPropertyChanged(nameof(Filename));
+                OnPropertyChanged(nameof(ReadyToDownload));
             }
         }
 
@@ -77,6 +79,7 @@ namespace OpenMediaDownloader.ViewModels
             {
                 _path = value;
                 OnPropertyChanged(nameof(Path));
+                OnPropertyChanged(nameof(ReadyToDownload));
             }
         }
 
@@ -200,6 +203,17 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
+        public bool ReadyToDownload
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Filename)) return false;
+                if (string.IsNullOrEmpty(Path)) return false;
+                if (!OutputFormatViewModels.Any(x => x.UseVideo || x.UseVideo)) return false;
+                return true;
+            }
+        }
+
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
@@ -211,6 +225,7 @@ namespace OpenMediaDownloader.ViewModels
             if (e.PropertyName == nameof(OutputFormatViewModel.UseVideo) || e.PropertyName == nameof(OutputFormatViewModel.UseAudio))
             {
                 OnPropertyChanged(nameof(FileExtension));
+                OnPropertyChanged(nameof(ReadyToDownload));
             }
         }
 
@@ -247,6 +262,7 @@ namespace OpenMediaDownloader.ViewModels
             if (e.PropertyName == nameof(OutputFormatViewModel.UseVideo) || e.PropertyName == nameof(OutputFormatViewModel.UseAudio))
             {
                 OnPropertyChanged(nameof(FileExtension));
+                OnPropertyChanged(nameof(ReadyToDownload));
             }
         }
 

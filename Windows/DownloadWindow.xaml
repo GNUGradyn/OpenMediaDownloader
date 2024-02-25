@@ -114,6 +114,7 @@
                                                 <DataTrigger Binding="{Binding AudioCodec}" Value="Video Only">
                                                     <Setter Property="IsEnabled" Value="false"/>
                                                 </DataTrigger>
+                                                
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridCheckBoxColumn.ElementStyle>
@@ -186,7 +187,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0">File Name</Label>
                         <Label Grid.Row="1" Grid.Column="0">Output Directory</Label>
-                        <controls:TextboxWithPlaceholder Padding="3" Grid.Row="0" Grid.Column="1" Placeholder="File Name" Text="{Binding Filename}"/>
+                        <controls:TextboxWithPlaceholder Padding="3" Grid.Row="0" Grid.Column="1" Placeholder="File Name" Text="{Binding Filename, Mode=TwoWay}"/>
                         <controls:TextboxWithPlaceholder Padding="3" Grid.Row="1" Grid.Column="1" Placeholder="Path" Text="{Binding Path, Mode=TwoWay}"/>
                         <Button Grid.Row="2" Grid.Column="2" Margin="3" Click="BrowseForDirectory">Browse</Button>
                         <Label Content="{Binding FileExtension}" Grid.Row="0" Grid.Column="2"/>
@@ -194,6 +195,6 @@
                 </GroupBox>
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Row="3" Padding="4" Margin="4">Download</Button>
+        <Button Grid.Row="3" Padding="4" Margin="4" IsEnabled="{Binding ReadyToDownload, Mode=OneWay}">Download</Button>
     </Grid>
 </Window>

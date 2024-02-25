@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:OpenMediaDownloader.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-		<TextBox Name="textbox" Text="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TextboxWithPlaceholder}}, UpdateSourceTrigger=PropertyChanged}" Loaded="TextboxLoaded" GotFocus="TextboxGotFocus" LostFocus="TextboxLostFocus" VerticalContentAlignment="Center" Foreground="#b3b3b3"/>
+		<TextBox Name="textbox" Text="{Binding ActualText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TextboxWithPlaceholder}}, UpdateSourceTrigger=PropertyChanged}" Loaded="TextboxLoaded" GotFocus="TextboxGotFocus" LostFocus="TextboxLostFocus" VerticalContentAlignment="Center" Foreground="#b3b3b3"/>
 </UserControl>
