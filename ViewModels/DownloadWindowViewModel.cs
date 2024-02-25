@@ -187,7 +187,14 @@ namespace OpenMediaDownloader.ViewModels
         {
             get
             {
-                return "." + Container;
+                if (OutputFormatViewModels.Any(x => x.UseVideo))
+                {
+                    return "." + OutputFormatViewModels.First(x => x.UseVideo).Container;
+                } 
+                else
+                {
+                    return "." + OutputFormatViewModels.First(x => x.UseAudio).Container;
+                }
             }
         }
 
