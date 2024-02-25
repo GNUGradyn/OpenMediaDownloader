@@ -67,6 +67,7 @@ namespace OpenMediaDownloader.Controls
             set
             {
                 _actualText = value;
+                if (value != Placeholder) Text = value;
                 OnPropertyChanged(nameof(ActualText));
             }
         }
