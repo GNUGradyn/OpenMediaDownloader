@@ -68,6 +68,37 @@ namespace OpenMediaDownloader.Windows
             }
         }
 
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
+            CheckBox checkbox = sender as CheckBox;
+
+            // Find the DataGridRow that contains the checkbox
+            DataGridRow row = FindParent<DataGridRow>(checkbox);
+            if (row == null) return;
+
+            // Get the OutputFormatViewModel for the row
+            OutputFormatViewModel currentViewModel = row.DataContext as OutputFormatViewModel;
+            if (currentViewModel == null) return;
+
+            string columnHeader = ((DataGridCell)checkbox.Parent).Column.Header.ToString();
+
+            if (columnHeader == "Use Video")
+            {
+                viewModel.OutputFormatViewModels.ToList().ForEach((x) =>
+                {
+                    x.UseVideo = false;
+                });
+            }
+            else if (columnHeader == "Use Audio")
+            {
+                viewModel.OutputFormatViewModels.ToList().ForEach((x) =>
+                {
+                    x.UseAudio = false;
+                });
+            };
+        }
+
         // Helper method to find a parent of a given control/item
         private T FindParent<T>(DependencyObject child) where T : DependencyObject
         {

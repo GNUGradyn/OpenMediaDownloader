@@ -34,10 +34,10 @@ namespace OpenMediaDownloader.Models
 
         public bool UseAudio
         {
-            get { return _useAudio; } // This check is neccesary to prevent an infinite loop where the event handler for updating UseAudio triggers itself
+            get { return _useAudio; } 
             set
             {
-                if (_useAudio != value)
+                if (_useAudio != value) // This check is neccesary to prevent an infinite loop where the event handler for updating UseAudio triggers itself
                 {
                     _useAudio = value;
                     OnPropertyChanged(nameof(UseAudio));
