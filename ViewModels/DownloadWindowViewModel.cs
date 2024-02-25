@@ -191,10 +191,11 @@ namespace OpenMediaDownloader.ViewModels
                 {
                     return "." + OutputFormatViewModels.First(x => x.UseVideo).Container;
                 } 
-                else
+                if (OutputFormatViewModels.Any(x => x.UseAudio))
                 {
                     return "." + OutputFormatViewModels.First(x => x.UseAudio).Container;
                 }
+                return "";
             }
         }
 
