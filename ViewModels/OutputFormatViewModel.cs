@@ -10,6 +10,7 @@ namespace OpenMediaDownloader.Models
 {
     public class OutputFormatViewModel : INotifyPropertyChanged
     {
+        private string _formatId;
         private bool _useVideo = false;
         private bool _useAudio = false;
         private string _height;
@@ -18,6 +19,19 @@ namespace OpenMediaDownloader.Models
         public string _audioCodec;
         public string _videoCodec;
         private string _fps;
+
+        public string FormatId
+        {
+            get
+            {
+                return _formatId;
+            }
+            set
+            {
+                _formatId = value;
+                // No need to call OnPropertyChanged as this has no UI bindings
+            }
+        }
 
         public bool UseVideo
         {
