@@ -116,5 +116,10 @@ namespace OpenMediaDownloader.Windows
                 return FindParent<T>(parentObject);
             }
         }
+
+        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

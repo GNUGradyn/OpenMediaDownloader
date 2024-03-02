@@ -195,6 +195,6 @@
                 </GroupBox>
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Row="3" Padding="4" Margin="4" IsEnabled="{Binding ReadyToDownload, Mode=OneWay}">Download</Button>
+        <Button Grid.Row="3" Padding="4" Margin="4" IsEnabled="{Binding ReadyToDownload, Mode=OneWay}" Click="DownloadButton_OnClick">Download</Button>
     </Grid>
 </Window>

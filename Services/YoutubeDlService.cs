@@ -46,5 +46,39 @@ namespace OpenMediaDownloader
             await tcs.Task; // This line effectively waits for the process to exit asynchronously
             return JsonConvert.DeserializeObject<Video>(output);
         }
+        
+        public event Action<float> DownloadProgressChanged;
+
+        public void DownloadAndTrack(string url, string outputPath)
+        {
+            // Download logic...
+            var exe = EmbeddedExeHelper.GetTempExePath("yt-dlp.exe");
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = exe,
+                    Arguments = $"-q --progress --newline {url} --ffmpeg-location {EmbeddedExeHelper.TempFolder}",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            };
+            proc.EnableRaisingEvents = true;
+            proc.OutputDataReceived += (sender, outline) =>
+            {
+                if (outline.Data != null) 
+                {
+                    float progress = float.Parse(outline.Data.Split('%')[0]) / 100f;
+                    DownloadProgressChanged?.Invoke(progress);
+                }
+            };
+            proc.Exited += (sender, args) =>
+            {
+                proc.Dispose();
+            };
+            proc.Start();
+            proc.BeginOutputReadLine();
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace OpenMediaDownloader.ViewModels
         private string _searchText = string.Empty;
         private bool _loading = false;
 
-
         public string SearchText
         {
             get 
