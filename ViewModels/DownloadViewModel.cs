@@ -6,6 +6,13 @@ namespace OpenMediaDownloader.ViewModels
 {
     public class DownloadViewModel : INotifyPropertyChanged
     {
+
+        public DownloadViewModel(OutputFormatViewModel outputFormat)
+        {
+            _outputFormat = outputFormat;
+            _status = 0;
+        }
+        
         private float _status;
         private OutputFormatViewModel _outputFormat;
 

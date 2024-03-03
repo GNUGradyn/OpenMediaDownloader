@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,7 @@ namespace OpenMediaDownloader.ViewModels
     {
         private string _searchText = string.Empty;
         private bool _loading = false;
+        private ObservableCollection<DownloadViewModel> _downloads;
 
         public string SearchText
         {

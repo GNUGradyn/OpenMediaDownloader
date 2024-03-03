@@ -209,7 +209,7 @@ namespace OpenMediaDownloader.ViewModels
             {
                 if (string.IsNullOrEmpty(Filename)) return false;
                 if (string.IsNullOrEmpty(Path)) return false;
-                if (!OutputFormatViewModels.Any(x => x.UseVideo || x.UseVideo)) return false;
+                if (!OutputFormatViewModels.Any(x => x.UseVideo || x.UseAudio)) return false;
                 return true;
             }
         }
@@ -236,35 +236,5 @@ namespace OpenMediaDownloader.ViewModels
                 item.PropertyChanged += OnOutputFormatViewModelPropertyChanged;
             }
         }
-
-        // When an item is added or removed to the collection, attach or deattach to its property changed event 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.OldItems != null)
-            {
-                foreach (OutputFormatViewModel item in e.OldItems)
-                {
-                    item.PropertyChanged -= OnItemPropertyChanged;
-                }
-            }
-
-            if (e.NewItems != null)
-            {
-                foreach (OutputFormatViewModel item in e.NewItems)
-                {
-                    item.PropertyChanged += OnItemPropertyChanged;
-                }
-            }
-        }
-
-        private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(OutputFormatViewModel.UseVideo) || e.PropertyName == nameof(OutputFormatViewModel.UseAudio))
-            {
-                OnPropertyChanged(nameof(FileExtension));
-                OnPropertyChanged(nameof(ReadyToDownload));
-            }
-        }
-
     }
 }
