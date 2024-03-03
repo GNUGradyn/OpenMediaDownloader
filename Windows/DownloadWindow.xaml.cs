@@ -119,7 +119,11 @@ namespace OpenMediaDownloader.Windows
 
         private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
+            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).Downloads.Add(new DownloadViewModel(
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo),
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseAudio)
+                ));
         }
     }
 }

@@ -6,15 +6,16 @@ namespace OpenMediaDownloader.ViewModels
 {
     public class DownloadViewModel : INotifyPropertyChanged
     {
-
-        public DownloadViewModel(OutputFormatViewModel outputFormat)
+        private float _status;
+        private OutputFormatViewModel _videoFormat;
+        private OutputFormatViewModel _audioFormat;
+        
+        public DownloadViewModel(OutputFormatViewModel videoFormat, OutputFormatViewModel audioFormat)
         {
-            _outputFormat = outputFormat;
+            _videoFormat = videoFormat;
+            _audioFormat = audioFormat;
             _status = 0;
         }
-        
-        private float _status;
-        private OutputFormatViewModel _outputFormat;
 
         public float Status
         {
@@ -26,8 +27,9 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
-        public OutputFormatViewModel OutputFormat => _outputFormat; // This will not change, no setter neccesary
-
+        public OutputFormatViewModel VideoFormat => _videoFormat; // This will not change, no setter neccesary
+        public OutputFormatViewModel AudioFormat => _audioFormat; // This will not change, no setter neccesary
+        
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
