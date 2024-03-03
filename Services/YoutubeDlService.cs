@@ -15,7 +15,7 @@ namespace OpenMediaDownloader
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-j {url}  --ffmpeg-location {EmbeddedExeHelper.TempFolder}",
+                    Arguments = $"-j \"{url}\"  --ffmpeg-location {EmbeddedExeHelper.TempFolder}",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
