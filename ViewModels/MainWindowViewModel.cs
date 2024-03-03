@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,14 @@ namespace OpenMediaDownloader.ViewModels
     {
         private string _searchText = string.Empty;
         private bool _loading = false;
-        private ObservableCollection<DownloadViewModel> _downloads;
+        private ObservableCollection<DownloadViewModel> _downloads = new ObservableCollection<DownloadViewModel>();
+
+        public MainWindowViewModel()
+        {
+            _downloads.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(Downloads));
+        }
+        
+        public ObservableCollection<DownloadViewModel> Downloads => _downloads; // Initalized empty, no setter needed
 
         public string SearchText
         {
