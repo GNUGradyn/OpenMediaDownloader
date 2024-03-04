@@ -9,7 +9,7 @@ namespace OpenMediaDownloader.ViewModels
     {
         private readonly string _name;
         private readonly BitmapImage _thumbnail;
-        private float _status;
+        private float _progress;
         private readonly string _path;
         
         public DownloadViewModel(string name, BitmapImage thumbnail, string path)
@@ -19,13 +19,13 @@ namespace OpenMediaDownloader.ViewModels
             _path = path;
         }
 
-        public float Status
+        public float Progress
         {
-            get => _status;
+            get => _progress;
             set
             {
-                _status = value;
-                OnPropertyChanged(nameof(Status));
+                _progress = value;
+                OnPropertyChanged(nameof(Progress));
             }
         }
 

@@ -15,7 +15,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" Height="15"></ProgressBar>
+        <Image Grid.Row="0" Grid.Column="0" Width="100" Height="100" Source="{Binding Thumbnail, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Content="{Binding Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="{Binding Path, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <ProgressBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="15"></ProgressBar>
     </Grid>
 </UserControl>
