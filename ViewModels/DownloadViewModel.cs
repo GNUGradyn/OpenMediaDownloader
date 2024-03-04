@@ -10,15 +10,13 @@ namespace OpenMediaDownloader.ViewModels
         private readonly string _name;
         private readonly BitmapImage _thumbnail;
         private float _status;
-        private readonly string _videoFormatInfo;
-        private readonly string _audioFormatInfo;
+        private readonly string _path;
         
-        public DownloadViewModel(string name, BitmapImage thumbnail, string videoFormatInfo, string audioFormatInfo)
+        public DownloadViewModel(string name, BitmapImage thumbnail, string path)
         {
             _name = name;
             _thumbnail = thumbnail;
-            _videoFormatInfo = videoFormatInfo;
-            _audioFormatInfo = audioFormatInfo;
+            _path = path;
         }
 
         public float Status
@@ -34,9 +32,7 @@ namespace OpenMediaDownloader.ViewModels
         // These do not need setters. they will not change after being set by the constructor
         public string Name => _name;
         public BitmapImage Thumbnail => _thumbnail;
-        public string VideoFormatInfo => _videoFormatInfo;
-        public string AudioFormatInfo => _audioFormatInfo;
-        
+        public string Path => _path;
         
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
