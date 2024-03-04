@@ -121,8 +121,10 @@ namespace OpenMediaDownloader.Windows
         {
             DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
             ((MainWindowViewModel)Application.Current.MainWindow.DataContext).Downloads.Add(new DownloadViewModel(
-                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo),
-                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseAudio)
+                viewModel.Title,
+                viewModel.Thumbnail,
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo)?.VideoCodecDescription,
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo)?.AudioCodecDescription
                 ));
         }
     }

@@ -1,20 +1,24 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Media.Imaging;
 using OpenMediaDownloader.Models;
 
 namespace OpenMediaDownloader.ViewModels
 {
     public class DownloadViewModel : INotifyPropertyChanged
     {
+        private readonly string _name;
+        private readonly BitmapImage _thumbnail;
         private float _status;
-        private OutputFormatViewModel _videoFormat;
-        private OutputFormatViewModel _audioFormat;
+        private readonly string _videoFormatInfo;
+        private readonly string _audioFormatInfo;
         
-        public DownloadViewModel(OutputFormatViewModel videoFormat, OutputFormatViewModel audioFormat)
+        public DownloadViewModel(string name, BitmapImage thumbnail, string videoFormatInfo, string audioFormatInfo)
         {
-            _videoFormat = videoFormat;
-            _audioFormat = audioFormat;
-            _status = 0;
+            _name = name;
+            _thumbnail = thumbnail;
+            _videoFormatInfo = videoFormatInfo;
+            _audioFormatInfo = audioFormatInfo;
         }
 
         public float Status
@@ -27,8 +31,12 @@ namespace OpenMediaDownloader.ViewModels
             }
         }
 
-        public OutputFormatViewModel VideoFormat => _videoFormat; // This will not change, no setter neccesary
-        public OutputFormatViewModel AudioFormat => _audioFormat; // This will not change, no setter neccesary
+        // These do not need setters. they will not change after being set by the constructor
+        public string Name => _name;
+        public BitmapImage Thumbnail => _thumbnail;
+        public string VideoFormatInfo => _videoFormatInfo;
+        public string AudioFormatInfo => _audioFormatInfo;
+        
         
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

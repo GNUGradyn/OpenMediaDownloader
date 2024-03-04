@@ -15,10 +15,13 @@ namespace OpenMediaDownloader.Models
         private bool _useAudio = false;
         private string _height;
         private string _width;
-        public string _container;
-        public string _audioCodec;
-        public string _videoCodec;
+        private string _container;
+        private string _audioCodec;
+        private string _videoCodec;
         private string _fps;
+        private string _videoCodecDescription;
+        private string _audioCodecDescription;
+        
 
         public string FormatId
         {
@@ -33,6 +36,32 @@ namespace OpenMediaDownloader.Models
             }
         }
 
+        public string VideoCodecDescription
+        {
+            get
+            {
+                return _videoCodecDescription;
+            }
+            set
+            {
+                _videoCodecDescription = value;
+                OnPropertyChanged(nameof(VideoCodecDescription));
+            }
+        }
+        
+        public string AudioCodecDescription
+        {
+            get
+            {
+                return _audioCodecDescription;
+            }
+            set
+            {
+                _audioCodecDescription = value;
+                OnPropertyChanged(nameof(AudioCodecDescription));
+            }
+        }
+        
         public bool UseVideo
         {
             get { return _useVideo; }
