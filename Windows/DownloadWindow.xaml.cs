@@ -115,6 +115,7 @@ namespace OpenMediaDownloader.Windows
                 viewModel.Thumbnail,
                 Path.Combine(viewModel.Path, viewModel.Filename)
                 ));
+            Close();
         }
     }
 }

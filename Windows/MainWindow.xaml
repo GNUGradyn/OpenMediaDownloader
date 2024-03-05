@@ -34,6 +34,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <local:ActualWidthWithoutPaddingConverter x:Key="ActualWidthWithoutPaddingConverter" />
     </Window.Resources>
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
@@ -48,9 +49,16 @@
         </Grid.RowDefinitions>
         <controls:Search Margin="0 0 4 0" SearchText="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Loading="{Binding Loading, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         <Button Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Padding="4 0 4 0" Click="Download_Click">Download</Button>
-        <ListView ItemsSource="{Binding Downloads}">
+        <ListView x:Name="myListView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Downloads}" Background="Transparent" BorderThickness="0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
-                <controls:Download/>
+                <DataTemplate>
+                    <controls:Download Title="{Binding Title}" Width="{Binding ActualWidth, ElementName=myListView, Converter={StaticResource ActualWidthWithoutPaddingConverter}, ConverterParameter=6}"/>
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Height="30" Style="{StaticResource RoundedProgressBar}" />

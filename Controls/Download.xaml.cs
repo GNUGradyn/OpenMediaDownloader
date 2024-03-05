@@ -12,7 +12,7 @@ namespace OpenMediaDownloader.Controls
         }
         
         public static readonly DependencyProperty ProgressProperty =
-            DependencyProperty.Register("Progress", typeof(float), typeof(Download), new PropertyMetadata(0));
+            DependencyProperty.Register("Progress", typeof(float), typeof(Download), new PropertyMetadata(0f));
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(Download), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty PathProperty =

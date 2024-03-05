@@ -7,14 +7,14 @@ namespace OpenMediaDownloader.ViewModels
 {
     public class DownloadViewModel : INotifyPropertyChanged
     {
-        private readonly string _name;
+        private readonly string _title;
         private readonly BitmapImage _thumbnail;
         private float _progress;
         private readonly string _path;
         
-        public DownloadViewModel(string name, BitmapImage thumbnail, string path)
+        public DownloadViewModel(string title, BitmapImage thumbnail, string path)
         {
-            _name = name;
+            _title = title;
             _thumbnail = thumbnail;
             _path = path;
         }
@@ -30,7 +30,7 @@ namespace OpenMediaDownloader.ViewModels
         }
 
         // These do not need setters. they will not change after being set by the constructor
-        public string Name => _name;
+        public string Title => _title;
         public BitmapImage Thumbnail => _thumbnail;
         public string Path => _path;
         
