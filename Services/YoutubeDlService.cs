@@ -72,6 +72,7 @@ namespace OpenMediaDownloader
                     Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             };
@@ -99,14 +100,37 @@ namespace OpenMediaDownloader
                     dialog.Show();
                 }
             };
+            proc.ErrorDataReceived += (sender, outline) =>
+            {
+                var dialog = new Ookii.Dialogs.Wpf.TaskDialog()
+                {
+                    WindowTitle = "Open Media Downloader",
+                    Content = $"Download error\n{outline.Data}",
+                    MainIcon = Ookii.Dialogs.Wpf.TaskDialogIcon.Error
+                };
+                dialog.Buttons.Add(new Ookii.Dialogs.Wpf.TaskDialogButton(Ookii.Dialogs.Wpf.ButtonType.Ok));
+                dialog.Show();
+            };
             proc.Exited += (sender, args) =>
             {
+                if (proc.ExitCode != 0)
+                {
+                    var dialog = new Ookii.Dialogs.Wpf.TaskDialog()
+                    {
+                        WindowTitle = "Open Media Downloader",
+                        Content = $"Non 0 ytdl exit code: " + proc.ExitCode,
+                        MainIcon = Ookii.Dialogs.Wpf.TaskDialogIcon.Error
+                    };
+                    dialog.Buttons.Add(new Ookii.Dialogs.Wpf.TaskDialogButton(Ookii.Dialogs.Wpf.ButtonType.Ok));
+                    dialog.Show();
+                }
                 DownloadProgressChanged?.Invoke(100, false, true);
                 proc.Dispose();
             };
             Console.WriteLine("Invoking yt-dlp with args " + arguments);
             proc.Start();
             proc.BeginOutputReadLine();
+            proc.BeginErrorReadLine();
         }
     }
 }
