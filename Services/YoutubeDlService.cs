@@ -73,10 +73,20 @@ namespace OpenMediaDownloader
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += (sender, outline) =>
             {
-                if (outline.Data != null && outline.Data.Split('/')[0] != "NA" && outline.Data.Split('/')[1] != "NA") 
+                if (outline.Data != null && outline.Data.Split('/').Length == 2 && int.TryParse(outline.Data.Split('/')[0], out _) && int.TryParse(outline.Data.Split('/')[1], out _)) 
                 {
                     int progress = (int.Parse(outline.Data.Split('/')[0]) / int.Parse(outline.Data.Split('/')[1]))*100;
                     DownloadProgressChanged?.Invoke(progress);
+                } else
+                {
+                    var dialog = new Ookii.Dialogs.Wpf.TaskDialog()
+                    {
+                        WindowTitle = "Open Media Downloader",
+                        Content = $"Download error - yt-dlp message not understood\n{outline.Data}",
+                        MainIcon = Ookii.Dialogs.Wpf.TaskDialogIcon.Error
+                    };
+                    dialog.Buttons.Add(new Ookii.Dialogs.Wpf.TaskDialogButton(Ookii.Dialogs.Wpf.ButtonType.Ok));
+                    dialog.Show();
                 }
             };
             proc.Exited += (sender, args) =>
