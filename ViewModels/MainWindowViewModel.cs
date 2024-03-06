@@ -25,14 +25,17 @@ namespace OpenMediaDownloader.ViewModels
 
         public string SearchText
         {
-            get 
+            get
             {
                 return _searchText;
             }
             set
             {
-                _searchText = value;
-                OnPropertyChanged(nameof(SearchText));
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                }
             }
         }
 

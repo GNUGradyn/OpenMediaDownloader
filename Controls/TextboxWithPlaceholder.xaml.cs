@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenMediaDownloader.Controls
 {
@@ -36,7 +37,7 @@ namespace OpenMediaDownloader.Controls
             DependencyProperty.Register("Placeholder", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty, SetTextColor));
+            DependencyProperty.Register("Text", typeof(string), typeof(TextboxWithPlaceholder), new PropertyMetadata(string.Empty, OnTextChanged));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,9 +46,17 @@ namespace OpenMediaDownloader.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private static void SetTextColor(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TextboxWithPlaceholder obj = d as TextboxWithPlaceholder;
+            SetTextColor(obj);
+            //obj.OnPropertyChanged(nameof(Text)); this doesnt work for some reason, workaround below
+            obj.Text = e.NewValue as string;
+            obj.ActualText = e.NewValue as string;
+        }
+
+        private static void SetTextColor(TextboxWithPlaceholder obj)
+        {
             if (string.IsNullOrEmpty(obj.Text))
             {
                 obj.SearchQueryColor = "#b3b3b3";
@@ -80,12 +89,26 @@ namespace OpenMediaDownloader.Controls
             }
         }
 
+        public void SetActualText(string newText)
+        {
+            ActualText = newText;
+        }
+
+        private void TextboxGotFocus(object sender, RoutedEventArgs e)
+        {
+            SetActualText(Text);
+        }
+
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { 
-                SetValue(TextProperty, value);
-
+            set
+            {
+                if (value != Text) {
+                    SetValue(TextProperty, value);
+                    OnPropertyChanged(nameof(Text));
+                    SetActualText(value);
+                }
             }
         }
 
@@ -102,11 +125,6 @@ namespace OpenMediaDownloader.Controls
         public void TextboxLoaded(object sender, RoutedEventArgs e)
         {
             ActualText = Placeholder;
-        }
-
-        private void TextboxGotFocus(object sender, RoutedEventArgs e)
-        {
-                ActualText = Text;
         }
 
         private void TextboxLostFocus(object sender, RoutedEventArgs e)
