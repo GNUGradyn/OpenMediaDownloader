@@ -119,8 +119,8 @@ namespace OpenMediaDownloader.Windows
             var dlsvc = new YoutubeDlService();
             dlsvc.DownloadProgressChanged += (int progress) => newDownload.Progress = progress;
             dlsvc.DownloadAndTrack(
-                viewModel.Url, 
-                Path.Combine(viewModel.Path, viewModel.Filename), 
+                viewModel.Url,
+                Path.Combine(viewModel.Path, viewModel.Filename + viewModel.FileExtension), 
                 viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo).FormatId ?? "none", 
                 viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseAudio).FormatId ?? "none");
             Close();
