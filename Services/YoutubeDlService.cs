@@ -59,12 +59,14 @@ namespace OpenMediaDownloader
             if (!string.IsNullOrEmpty(videoFormat)) formats.Add(videoFormat);
             if (!string.IsNullOrEmpty(audioFormat)) formats.Add(audioFormat);
 
+            var arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"";
+
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
+                    Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -94,6 +96,7 @@ namespace OpenMediaDownloader
             {
                 proc.Dispose();
             };
+            Console.WriteLine("Invoking yt-dlp with args " + arguments);
             proc.Start();
             proc.BeginOutputReadLine();
         }
