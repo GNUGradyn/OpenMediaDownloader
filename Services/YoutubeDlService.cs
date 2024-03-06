@@ -96,7 +96,7 @@ namespace OpenMediaDownloader
             {
                 proc.Dispose();
             };
-            Console.WriteLine("Invoking yt-dlp with args " + arguments)
+            Console.WriteLine("Invoking yt-dlp with args " + arguments);
             proc.Start();
             proc.BeginOutputReadLine();
         }
