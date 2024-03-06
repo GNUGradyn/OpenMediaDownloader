@@ -266,6 +266,7 @@
     </Compile>
     <Compile Include="Converters\ActualWidthWithoutPaddingConverter.cs" />
     <Compile Include="Converters\FloatToStringConverter.cs" />
+    <Compile Include="Converters\DoneStatusToVisibilityConverter.cs" />
     <Compile Include="EmbeddedExeHelper.cs" />
     <Compile Include="Models\FormatOption.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />

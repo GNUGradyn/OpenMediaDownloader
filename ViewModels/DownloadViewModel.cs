@@ -11,6 +11,8 @@ namespace OpenMediaDownloader.ViewModels
         private readonly BitmapImage _thumbnail;
         private int _progress;
         private readonly string _path;
+        private bool _processing = false;
+        private bool _done = false;
         
         public DownloadViewModel(string title, BitmapImage thumbnail, string path)
         {
@@ -26,6 +28,26 @@ namespace OpenMediaDownloader.ViewModels
             {
                 _progress = value;
                 OnPropertyChanged(nameof(Progress));
+            }
+        }
+
+        public bool Done
+        {
+            get => _done;
+            set
+            {
+                _done = value;
+                OnPropertyChanged(nameof(Done));
+            }
+        }
+
+        public bool Processing
+        {
+            get => _processing;
+            set
+            {
+                _processing = value;
+                OnPropertyChanged(nameof(Processing));
             }
         }
 

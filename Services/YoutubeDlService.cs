@@ -50,7 +50,10 @@ namespace OpenMediaDownloader
             return JsonConvert.DeserializeObject<Video>(output);
         }
         
-        public event Action<int> DownloadProgressChanged;
+        /// <summary>
+        /// Progress, Processing, Done
+        /// </summary>
+        public event Action<int, bool, bool> DownloadProgressChanged;
 
         public void DownloadAndTrack(string url, string outputPath, string videoFormat, string audioFormat)
         {
@@ -79,8 +82,12 @@ namespace OpenMediaDownloader
                 if (outline.Data.Split('/').Length == 2 && int.TryParse(outline.Data.Split('/')[0], out _) && int.TryParse(outline.Data.Split('/')[1], out _)) 
                 {
                     int progress = (int.Parse(outline.Data.Split('/')[0]) / int.Parse(outline.Data.Split('/')[1]))*100;
-                    DownloadProgressChanged?.Invoke(progress);
-                } else
+                    DownloadProgressChanged?.Invoke(progress, false, false);
+                } else if (outline.Data.Split('/')[0] == "NA" && outline.Data.Split('/')[1] == "NA")
+                {
+                    DownloadProgressChanged?.Invoke(100, true, false);
+                }
+                else
                 {
                     var dialog = new Ookii.Dialogs.Wpf.TaskDialog()
                     {
@@ -94,6 +101,7 @@ namespace OpenMediaDownloader
             };
             proc.Exited += (sender, args) =>
             {
+                DownloadProgressChanged?.Invoke(100, false, true);
                 proc.Dispose();
             };
             Console.WriteLine("Invoking yt-dlp with args " + arguments);

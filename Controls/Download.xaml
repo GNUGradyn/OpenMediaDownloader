@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:OpenMediaDownloader.Controls"
+             xmlns:local="clr-namespace:OpenMediaDownloader.Controls" xmlns:openmediadownloader="clr-namespace:OpenMediaDownloader"
              mc:Ignorable="d"
              Height="50">
+    <Control.Resources>
+        <openmediadownloader:DoneStatusToVisibilityConverter x:Key="DoneStatusToVisibilityConverter"/>
+    </Control.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,6 +23,6 @@
             <Label Content="{Binding Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="{Binding Path, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"  Minimum="0" Maximum="100" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="15"></ProgressBar>
+        <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Processing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="100" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="15" Visibility="{Binding Done, Converter={StaticResource DoneStatusToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"></ProgressBar>
     </Grid>
 </UserControl>
