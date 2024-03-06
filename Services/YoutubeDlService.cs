@@ -49,7 +49,7 @@ namespace OpenMediaDownloader
         
         public event Action<float> DownloadProgressChanged;
 
-        public void DownloadAndTrack(string url, string outputPath)
+        public void DownloadAndTrack(string url, string outputPath, string videoFormat, string audioFormat)
         {
             // Download logic...
             var exe = EmbeddedExeHelper.GetTempExePath("yt-dlp.exe");
@@ -58,7 +58,7 @@ namespace OpenMediaDownloader
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-q --progress --newline {url} --ffmpeg-location {EmbeddedExeHelper.TempFolder}",
+                    Arguments = $"-q --progress --newline -f \"${videoFormat}+{audioFormat}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true

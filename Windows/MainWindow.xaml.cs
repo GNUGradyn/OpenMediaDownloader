@@ -40,8 +40,10 @@ namespace OpenMediaDownloader
         {
             var context = DataContext as MainWindowViewModel;
             if (string.IsNullOrWhiteSpace(context.SearchText)) return;
+            string query = context.SearchText;
+            context.SearchText = "Paste link here";
             context.Loading = true;
-            Video metadata = await _youtubeDlService.GetVideoMetadata(context.SearchText);
+            Video metadata = await _youtubeDlService.GetVideoMetadata(query);
             if (metadata == null)
             {
                 context.Loading = false;
