@@ -56,8 +56,8 @@ namespace OpenMediaDownloader
         {
             var exe = EmbeddedExeHelper.GetTempExePath("yt-dlp.exe");
             var formats = new List<string>();
-            if (!string.IsNullOrEmpty(videoFormat)) formats.Add(videoFormat);
-            if (!string.IsNullOrEmpty(audioFormat)) formats.Add(audioFormat);
+            if (!string.IsNullOrEmpty(videoFormat)) formats.Add(videoFormat.Replace("$", ""));
+            if (!string.IsNullOrEmpty(audioFormat)) formats.Add(audioFormat.Replace("$", ""));
 
             var arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"";
 
