@@ -75,7 +75,7 @@ namespace OpenMediaDownloader
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += (sender, outline) =>
             {
-                if (outline.Data != null) return;
+                if (outline.Data == null) return;
                 if (outline.Data.Split('/').Length == 2 && int.TryParse(outline.Data.Split('/')[0], out _) && int.TryParse(outline.Data.Split('/')[1], out _)) 
                 {
                     int progress = (int.Parse(outline.Data.Split('/')[0]) / int.Parse(outline.Data.Split('/')[1]))*100;
@@ -96,7 +96,7 @@ namespace OpenMediaDownloader
             {
                 proc.Dispose();
             };
-            Console.WriteLine("Invoking yt-dlp with args " + arguments);
+            Console.WriteLine("Invoking yt-dlp with args " + arguments)
             proc.Start();
             proc.BeginOutputReadLine();
         }
