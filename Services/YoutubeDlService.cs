@@ -64,7 +64,7 @@ namespace OpenMediaDownloader
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-q --progress --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
+                    Arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -73,9 +73,9 @@ namespace OpenMediaDownloader
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += (sender, outline) =>
             {
-                if (outline.Data != null) 
+                if (outline.Data != null && outline.Data.Split('/')[0] != "NA" && outline.Data.Split('/')[1] != "NA") 
                 {
-                    int progress = (int)Math.Round(float.Parse(outline.Data.Replace("[download] ", "").Split('%')[0]));
+                    int progress = (int.Parse(outline.Data.Split('/')[0]) / int.Parse(outline.Data.Split('/')[1]))*100;
                     DownloadProgressChanged?.Invoke(progress);
                 }
             };

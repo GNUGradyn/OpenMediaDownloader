@@ -113,7 +113,7 @@ namespace OpenMediaDownloader.Windows
             var newDownload = new DownloadViewModel(
                 viewModel.Title,
                 viewModel.Thumbnail,
-                Path.Combine(viewModel.Path, viewModel.Filename)
+                Path.Combine(viewModel.Path, viewModel.Filename + viewModel.FileExtension)
                 );
             ((MainWindowViewModel)Application.Current.MainWindow.DataContext).Downloads.Add(newDownload);
             var dlsvc = new YoutubeDlService();
