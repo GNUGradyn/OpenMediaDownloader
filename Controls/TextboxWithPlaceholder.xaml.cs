@@ -49,10 +49,20 @@ namespace OpenMediaDownloader.Controls
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TextboxWithPlaceholder obj = d as TextboxWithPlaceholder;
-            SetTextColor(obj);
+
             //obj.OnPropertyChanged(nameof(Text)); this doesnt work for some reason, workaround below
-            obj.Text = e.NewValue as string;
-            obj.ActualText = e.NewValue as string;
+            if (string.IsNullOrEmpty(e.NewValue as string) || e.NewValue as string == obj.Placeholder)
+            {
+                obj.Text = string.Empty;
+                obj.ActualText = obj.Placeholder;
+            } 
+            else
+            {
+                obj.Text = e.NewValue as string;
+                obj.ActualText = e.NewValue as string;
+            }
+
+            SetTextColor(obj);
         }
 
         private static void SetTextColor(TextboxWithPlaceholder obj)
