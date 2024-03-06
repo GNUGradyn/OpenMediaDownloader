@@ -64,7 +64,7 @@ namespace OpenMediaDownloader
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline  \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
+                    Arguments = $"-q --progress --progress-template \"%(progress.fragment_index)s/%(progress.fragment_count)s\" --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
