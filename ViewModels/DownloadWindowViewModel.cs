@@ -28,6 +28,12 @@ namespace OpenMediaDownloader.ViewModels
         private ObservableCollection<OutputFormatViewModel> _outputFormatViewModels = new ObservableCollection<OutputFormatViewModel>();
         private string _filename;
         private string _path;
+        private string _url;
+
+        public DownloadWindowViewModel(string url)
+        {
+            _url = url;
+        }
 
         public ObservableCollection<OutputFormatViewModel> OutputFormatViewModels
         {
@@ -41,6 +47,8 @@ namespace OpenMediaDownloader.ViewModels
                 OnPropertyChanged(nameof(OutputFormatViewModels));
             }
         }
+
+        public string Url => _url; // Will not change, no setter neccesary
 
         public string Title
         {

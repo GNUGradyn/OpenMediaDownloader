@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Newtonsoft.Json;
 
 namespace OpenMediaDownloader
@@ -51,14 +54,17 @@ namespace OpenMediaDownloader
 
         public void DownloadAndTrack(string url, string outputPath, string videoFormat, string audioFormat)
         {
-            // Download logic...
             var exe = EmbeddedExeHelper.GetTempExePath("yt-dlp.exe");
+            var formats = new List<string>();
+            if (!string.IsNullOrEmpty(videoFormat)) formats.Add(videoFormat);
+            if (!string.IsNullOrEmpty(audioFormat)) formats.Add(audioFormat);
+
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = $"-q --progress --newline -f \"${videoFormat}+{audioFormat}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
+                    Arguments = $"-q --progress --newline -f \"${string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -69,7 +75,7 @@ namespace OpenMediaDownloader
             {
                 if (outline.Data != null) 
                 {
-                    float progress = float.Parse(outline.Data.Split('%')[0]) / 100f;
+                    float progress = float.Parse(outline.Data.Replace("[download]", "").Split('%')[0]);
                     DownloadProgressChanged?.Invoke(progress);
                 }
             };

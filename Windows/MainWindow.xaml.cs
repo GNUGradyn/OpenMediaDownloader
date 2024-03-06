@@ -65,7 +65,7 @@ namespace OpenMediaDownloader
             bitmap.EndInit();
             context.Loading = false;
 
-            var viewModel = new DownloadWindowViewModel()
+            var viewModel = new DownloadWindowViewModel(query)
             {
                 Title = metadata.Title,
                 Thumbnail = bitmap,

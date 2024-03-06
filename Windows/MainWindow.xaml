@@ -57,7 +57,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:Download Title="{Binding Title}" Thumbnail="{Binding Thumbnail}" Width="{Binding ActualWidth, ElementName=myListView, Converter={StaticResource ActualWidthWithoutPaddingConverter}, ConverterParameter=6}" Path="{Binding Path}"/>
+                    <controls:Download Title="{Binding Title}" Thumbnail="{Binding Thumbnail}" Width="{Binding ActualWidth, ElementName=myListView, Converter={StaticResource ActualWidthWithoutPaddingConverter}, ConverterParameter=6}" Path="{Binding Path}" Progress="{Binding Progress}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -110,11 +110,19 @@ namespace OpenMediaDownloader.Windows
         private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
         {
             DownloadWindowViewModel viewModel = DataContext as DownloadWindowViewModel;
-            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).Downloads.Add(new DownloadViewModel(
+            var newDownload = new DownloadViewModel(
                 viewModel.Title,
                 viewModel.Thumbnail,
                 Path.Combine(viewModel.Path, viewModel.Filename)
-                ));
+                );
+            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).Downloads.Add(newDownload);
+            var dlsvc = new YoutubeDlService();
+            dlsvc.DownloadProgressChanged += (float progress) => newDownload.Progress = progress;
+            dlsvc.DownloadAndTrack(
+                viewModel.Url, 
+                Path.Combine(viewModel.Path, viewModel.Filename), 
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseVideo).FormatId ?? "none", 
+                viewModel.OutputFormatViewModels.SingleOrDefault(x => x.UseAudio).FormatId ?? "none");
             Close();
         }
     }
