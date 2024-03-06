@@ -20,6 +20,6 @@
             <Label Content="{Binding Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="{Binding Path, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <ProgressBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="15"></ProgressBar>
+        <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Download}}, UpdateSourceTrigger=PropertyChanged}"  Minimum="0" Maximum="100" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="15"></ProgressBar>
     </Grid>
 </UserControl>

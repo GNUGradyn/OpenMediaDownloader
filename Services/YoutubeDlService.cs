@@ -50,7 +50,7 @@ namespace OpenMediaDownloader
             return JsonConvert.DeserializeObject<Video>(output);
         }
         
-        public event Action<float> DownloadProgressChanged;
+        public event Action<int> DownloadProgressChanged;
 
         public void DownloadAndTrack(string url, string outputPath, string videoFormat, string audioFormat)
         {
@@ -75,7 +75,7 @@ namespace OpenMediaDownloader
             {
                 if (outline.Data != null) 
                 {
-                    float progress = float.Parse(outline.Data.Replace("[download]", "").Split('%')[0]);
+                    int progress = (int)Math.Round(float.Parse(outline.Data.Replace("[download] ", "").Split('%')[0]));
                     DownloadProgressChanged?.Invoke(progress);
                 }
             };
