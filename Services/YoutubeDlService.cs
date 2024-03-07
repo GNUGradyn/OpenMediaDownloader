@@ -62,7 +62,7 @@ namespace OpenMediaDownloader
             if (!string.IsNullOrEmpty(videoFormat)) formats.Add(videoFormat);
             if (!string.IsNullOrEmpty(audioFormat)) formats.Add(audioFormat);
 
-            var arguments = $"-q --progress --progress-template \"%(progress.downloaded_bytes)s/%(progress.total_bytes)s-%(progress.fragment_index)s/%(progress.fragment_count)s\" --remux-video {outputPath.Split('.').Last()} --newline -f \"{string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"";
+            var arguments = $"-q --progress --progress-template \"%(progress._percent_str)s\" --no-color --remux-video {outputPath.Split('.').Last()} --newline -f \"{string.Join("+", formats)}\" \"{url}\" --ffmpeg-location \"{EmbeddedExeHelper.TempFolder}\" -o \"{outputPath}\"";
 
             var proc = new Process
             {
@@ -82,18 +82,12 @@ namespace OpenMediaDownloader
                 Console.WriteLine("[YTDL] " + outline.Data);
                 if (outline.Data == null) return;
                 if (outline.Data.Split('-').Length != 2) return;
-                var nonSegmentedData = outline.Data.Split('-')[0];
-                var segmentedData = outline.Data.Split('-')[1];
-                if (nonSegmentedData.Split('/').Length == 2 && int.TryParse(segmentedData.Split('/')[0], out _) && int.TryParse(segmentedData.Split('/')[1], out _))
+                float progress;
+                if (float.TryParse(outline.Data.Replace(" ", ""), out progress))
                 {
-                    int progress = (int)((float.Parse(segmentedData.Split('/')[0]) / float.Parse(segmentedData.Split('/')[1])) * 100);
-                    DownloadProgressChanged?.Invoke(progress, false, false);
+                    DownloadProgressChanged?.Invoke((int)Math.Round(progress), false, false);
                 }
-                if (segmentedData.Split('/').Length == 2 && int.TryParse(nonSegmentedData.Split('/')[0], out _) && int.TryParse(nonSegmentedData.Split('/')[1], out _)) 
-                {
-                    int progress = (int)((float.Parse(nonSegmentedData.Split('/')[0]) / float.Parse(nonSegmentedData.Split('/')[1])) * 100);
-                    DownloadProgressChanged?.Invoke(progress, false, false);
-                } else if (segmentedData.Split('/')[0] == "NA" && segmentedData.Split('/')[1] == "NA")
+                else if (outline.Data.Replace(" ", "") == "NA")
                 {
                     DownloadProgressChanged?.Invoke(100, true, false);
                 }
