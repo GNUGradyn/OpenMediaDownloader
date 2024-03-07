@@ -19,12 +19,53 @@ namespace OpenMediaDownloader.ViewModels
 
         public MainWindowViewModel()
         {
-            _downloads.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) =>
-            {
-                OnPropertyChanged(nameof(Downloads));
-            };
+            _downloads.CollectionChanged += Downloads_CollectionChanged;
+            UpdateOverallProgress();
         }
-        
+
+        private void Downloads_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (DownloadViewModel item in e.OldItems)
+                {
+                    item.PropertyChanged -= Item_PropertyChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (DownloadViewModel item in e.NewItems)
+                {
+                    item.PropertyChanged += Item_PropertyChanged;
+                }
+            }
+
+            UpdateOverallProgress();
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DownloadViewModel.Progress))
+            {
+                UpdateOverallProgress();
+            }
+        }
+
+        private void UpdateOverallProgress()
+        {
+            if (_downloads.Any())
+            {
+                OverallProgress = (int)Math.Round(_downloads.Select(x => x.Progress).Average());
+                OnPropertyChanged(nameof(OverallProgress));
+            }
+            else
+            {
+                OverallProgress = 0; // Or whatever makes sense when there are no downloads.
+                OnPropertyChanged(nameof(OverallProgress));
+            }
+        }
+
         public ObservableCollection<DownloadViewModel> Downloads => _downloads; // Initalized empty, no setter needed
 
 
