@@ -14,14 +14,29 @@ namespace OpenMediaDownloader.ViewModels
     {
         private string _searchText = string.Empty;
         private bool _loading = false;
+        private int _overallProgress = 0;
         private ObservableCollection<DownloadViewModel> _downloads = new ObservableCollection<DownloadViewModel>();
 
         public MainWindowViewModel()
         {
-            _downloads.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(Downloads));
+            _downloads.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) =>
+            {
+                OnPropertyChanged(nameof(Downloads));
+            };
         }
         
         public ObservableCollection<DownloadViewModel> Downloads => _downloads; // Initalized empty, no setter needed
+
+
+        public int OverallProgress
+        {
+            get => _overallProgress;
+            set
+            {
+                _overallProgress = value;
+                OnPropertyChanged(nameof(OverallProgress));
+            }
+        }
 
         public string SearchText
         {

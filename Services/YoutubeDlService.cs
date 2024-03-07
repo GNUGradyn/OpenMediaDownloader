@@ -81,9 +81,8 @@ namespace OpenMediaDownloader
             {
                 Console.WriteLine("[YTDL] " + outline.Data);
                 if (outline.Data == null) return;
-                if (outline.Data.Split('-').Length != 2) return;
                 float progress;
-                if (float.TryParse(outline.Data.Replace(" ", ""), out progress))
+                if (float.TryParse(outline.Data.Replace(" ", "").Replace("%", ""), out progress))
                 {
                     DownloadProgressChanged?.Invoke((int)Math.Round(progress), false, false);
                 }
